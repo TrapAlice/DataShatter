@@ -26,5 +26,8 @@ using std::ostringstream;
 typedef std::chrono::time_point<std::chrono::system_clock> Time;
 
 #define DEBUG(...) std::cerr << __FILE__ << ":" << __LINE__ << " - " << __VA_ARGS__ << std::endl;
+#define HAS_PRIVATE_VARIABLES struct PrivateVariables; unique_ptr<PrivateVariables> m;
+#define INIT_PRIVATE_VARIABLES m(new PrivateVariables())
+#define INIT_PRIVATE_VARIABLES_WITH(...) m(new PrivateVariables(__VA_ARGS__))
 
 #endif

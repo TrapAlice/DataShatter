@@ -2,5 +2,5 @@
 
 int main(){
 	Game dataShatter;
-	dataShatter.run();
+	dataShatter.Run();
 }

@@ -6,10 +6,10 @@
 class Game{
 public:
 	Game();
+	~Game();
 	void            Run();
 private:
-	class PrivateVariables;
-	unique_ptr<PrivateVariables> m;
+	HAS_PRIVATE_VARIABLES;
 };
 
 #endif
