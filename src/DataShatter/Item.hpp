@@ -8,7 +8,8 @@ struct ItemData;
 class Item{
 public:
 	Item(ItemData const& data);
-	~Item();
+	Item(Item&&) noexcept;
+	~Item() noexcept;
 	ItemData const& Data() const;
 private:
 	HAS_PRIVATE_VARIABLES;

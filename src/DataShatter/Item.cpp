@@ -14,7 +14,14 @@ Item::Item(ItemData const& data)
 	: INIT_PRIVATE_VARIABLES_WITH(data)
 {}
 
-Item::~Item(){}
+Item::Item(Item&& item) noexcept
+	: INIT_PRIVATE_VARIABLES_WITH(item.m->data)
+{
+	m->durability = item.m->durability;
+	m->maxDurability = item.m->maxDurability;
+}
+
+Item::~Item() noexcept {}
 
 ItemData const& Item::Data() const { return m->data; }
 
