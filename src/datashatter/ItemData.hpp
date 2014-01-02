@@ -12,5 +12,13 @@ struct ItemData{
 	int             MaxDurability;
 };
 
+class ItemDataStore{
+public:
+	static void     LoadData();
+	static ItemData const& GetData(int id);
+private:
+	static vector<ItemData> mItemData;
+};
+
 #endif
 
