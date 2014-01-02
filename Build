@@ -1,0 +1,152 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'fileutils'
+
+def create_bin_folder
+	if !File.directory?('bin/')
+		puts "Making bin directory"
+		Dir.mkdir('bin/')
+	end
+end
+
+def create_obj_folders
+	if !File.directory?('.obj/')
+		puts "Making obj directory"
+		Dir.mkdir('.obj/')
+	end
+end
+
+def create_obj_folders_project project
+	create_obj_folders
+	if !File.directory?(".obj/#{project}")
+		puts "Making .obj/#{project} directory"
+		Dir.mkdir(".obj/#{project}")
+	end
+end
+
+def create_dep_folders
+	if !File.directory?('.dep/')
+		puts "Making dep directory"
+		Dir.mkdir('.dep/')
+	end
+end
+
+def create_dep_folders_project project
+	create_dep_folders
+	if !File.directory?(".dep/#{project}")
+		puts "Making .dep/#{project} directory"
+		Dir.mkdir(".dep/#{project}")
+	end
+end
+
+def files_to_build project
+	to_build = []
+
+	Dir.glob("src/#{project}/**/*.cpp") do |source|
+		
+		target = ".obj/#{project}/" + File.basename(source, File.extname(source)) + ".o"
+		depend = ".dep/#{project}/" + File.basename(source, File.extname(source)) + ".d"
+		begin
+			File.open(depend, "r").each_line do |line|
+				next if line[2].chr == "/"
+				line.gsub!('\\',"")
+				line.gsub!(' '," ")
+				headers = line.split
+				if headers[0].include? ":"
+					headers.delete headers[0]
+				end
+				headers.each do |header|
+					if File.mtime(header) > File.mtime(target)
+						to_build.push source
+					end
+				end
+			end
+		rescue 
+			to_build.push source
+		end
+	end
+
+	return to_build.uniq
+end
+
+def build_object_files project, targets, compiler, flags
+	targets.each do |source|
+		target = ".obj/#{project}/" + File.basename(source, File.extname(source)) + ".o"
+		depend = ".dep/#{project}/" + File.basename(source, File.extname(source)) + ".d"
+		exec = "#{compiler} #{flags} #{source} -o #{target} -MD -MF #{depend}"
+		puts "    [BUILD] #{source}"
+		r = `#{exec}`
+		if $?.exitstatus == 1
+			exit
+		end
+	end
+end
+
+def link_project project, compiler, flags, *additional_objects
+	objects = ""
+	Dir.glob(".obj/#{project}/*.o") do |obj|
+		objects += " .obj/#{project}/" + obj
+	end
+	if additional_objects != nil
+		for additional in additional_objects
+			Dir.glob(".obj/#{additional}/*.o") do |obj|
+				objects += " .obj/#{additional}/" + obj
+			end
+		end
+	end
+	exe = "bin/#{project}"
+	exec = "#{compiler} #{objects} #{flags} -o #{exe}"
+	puts "  [LINKING] #{exe}"
+	`#{exec}`
+end
+
+def compile_project project, compiler, cflags
+	create_obj_folders_project project
+	create_dep_folders_project project
+	sources = files_to_build project
+	build_object_files project, sources, compiler, cflags
+end
+
+CC             = 'clang++'
+client_CFLAGS  = '-c -Wall -Iinclude -Isrc -ISDL -g -std=c++11'
+client_LDFLAGS = '-Llib -ltcod -ltcodxx -lsqlite3 -lSDL_net -Wl,-rpath=./lib'
+
+server_CFLAGS  = "-c -Wall -ISDL -Isrc -g -std=c++11"
+server_LDFLAGS = "-lsqlite3 -lSDL -lSDL_net -Wl,-rpath=./lib"
+
+options = {}
+
+optparse = OptionParser.new do|opts|
+	opts.banner = "Usage: Build [options]"
+	options[:verbose] = false
+	opts.on( '-v', '--verbose', 'Output more information' ) do
+		options[:verbose] = true
+	end
+	options[:clear] = false
+	opts.on( '-c', '--clear', 'Clears and rebuilds' ) do
+		options[:clear] = true
+	end
+	opts.on( '-g', '--help', 'Display help information' ) do
+		puts opts
+		exit
+	end
+end
+
+optparse.parse!
+
+if options[:clear]
+	puts "Deleting Obj folder"
+	FileUtils.rm_rf('.obj/')
+	puts "Deleting Dep folder"
+	FileUtils.rm_rf('.dep/')
+	puts "Deleting Bin folder"
+	FileUtils.rm_rf('.bin/')
+end
+
+create_bin_folder
+
+compile_project "datashatter", CC, client_CFLAGS
+
+link_project "datashatter", CC, client_LDFLAGS
+
