@@ -86,7 +86,7 @@ end
 def link_project project, compiler, flags, *additional_objects
 	objects = ""
 	Dir.glob(".obj/#{project}/*.o") do |obj|
-		objects += " .obj/#{project}/" + obj
+		objects += obj + " "
 	end
 	if additional_objects != nil
 		for additional in additional_objects
