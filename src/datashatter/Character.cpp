@@ -8,7 +8,9 @@ struct Character::PrivateVariables{
 	double          heat = 0;
 };
 
-Character::Character(){}
+Character::Character()
+	: INIT_PRIVATE_VARIABLES
+{}
 Character::~Character(){}
 
 void Character::TakeDamage(int amount)
