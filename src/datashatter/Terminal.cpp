@@ -11,18 +11,6 @@ struct Terminal::PrivateVariables{
 	int                x;
 };
 
-namespace{
-	int countNewLines(std::string const& str)
-	{
-		int count = 0;
-		for( size_t offset = str.find("\n"); offset != std::string::npos;
-			offset = str.find("\n", offset + str.length())){
-			count++;
-		}
-		return count;
-	}
-}
-
 Terminal::Terminal(string const& title)
 	: INIT_PRIVATE_VARIABLES 
 {
@@ -65,12 +53,6 @@ void Terminal::p(int x, int y, std::ostringstream& text)
 	if( x >= 0) m->x = x;
 	if( y >= 0) m->line = y;
 	m->console->print(m->x, m->line, text.str().c_str());
-	m->x += text.str().length();
-	int newLines = countNewLines(text.str());
-	if( newLines ){
-		m->line += newLines;
-		unsigned last = text.str().find_last_of("\n");
-		m->x = text.str().length() - last - 1;
-	}
+	m->line++;
 }
 
