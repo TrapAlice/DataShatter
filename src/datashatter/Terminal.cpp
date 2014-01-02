@@ -35,8 +35,7 @@ bool Terminal::isClosed()
 
 char Terminal::Key()
 {
-	TCOD_key_t key;
-	TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL, false);
+	TCOD_key_t key = TCODConsole::checkForKeypress(TCOD_KEY_PRESSED);
 	return key.c;
 }
 
