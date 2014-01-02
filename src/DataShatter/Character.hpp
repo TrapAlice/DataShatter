@@ -3,6 +3,8 @@
 
 #include "common.hpp"
 
+class Item;
+
 class Character{
 public:
 	Character();
@@ -14,11 +16,13 @@ public:
 	void            GainMana(double amount);
 	void            LoseHeat(double amount);
 	void            GenerateHeat(double amount);
+	void            GiveItem(Item);
 	int             Hp() const;
 	int             MaxHp() const;
 	int             Mana() const;
 	int             MaxMana() const;
 	int             Heat() const;
+	const vector<Item>& Items() const;
 private:
 	HAS_PRIVATE_VARIABLES;
 };

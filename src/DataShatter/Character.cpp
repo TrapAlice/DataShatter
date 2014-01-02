@@ -1,4 +1,5 @@
 #include "Character.hpp"
+#include "Item.hpp"
 
 struct Character::PrivateVariables{
 	int             hp = 50;
@@ -6,6 +7,7 @@ struct Character::PrivateVariables{
 	double          mana = 25;
 	double          maxMana = 25;
 	double          heat = 0;
+	vector<Item>    items;
 };
 
 Character::Character()
@@ -41,6 +43,11 @@ void Character::LoseHeat(double amount)
 void Character::GenerateHeat(double amount)
 {
 	m->heat = (m->heat + amount > 100)? 100 : m->heat + amount;
+}
+
+void Character::GiveItem(Item item)
+{
+	m->items.emplace_back(std::move(item));
 }
 
 int Character::Hp() const { return m->hp; }
