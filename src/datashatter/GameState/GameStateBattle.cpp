@@ -33,7 +33,20 @@ void State_Battle::Render()
 
 void State_Battle::Update()
 {
+	Character& c = w.GetCharacter();
 	switch( t.Key() ){
+		case '1':
+			if( c.Mana() >= 5){
+				c.UseMana(5);
+				c.GenerateHeat(2);
+				m->enemyHp -= 10;
+			}
+			break;
+	}
+	c.GainMana(0.2);
+	c.LoseHeat(0.1);
+	if( m->enemyHp <= 0 ){
+		s.pop();
 	}
 }
 
