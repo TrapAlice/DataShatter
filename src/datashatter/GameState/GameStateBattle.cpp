@@ -1,10 +1,11 @@
 #include "GameStateBattle.hpp"
 
+#include "../Character.hpp"
 #include "../Terminal.hpp"
 #include "../World.hpp"
 
 struct State_Battle::PrivateVariables{
-	int             enemyHp;
+	int             enemyHp = 100;
 };
 
 State_Battle::State_Battle(Terminal& t, GameStateStack& s, World& w)
@@ -17,11 +18,12 @@ State_Battle::~State_Battle(){}
 
 void State_Battle::Render()
 {
-	t.Printx(0, "Hp  :");
-	t.Printx(0, "Mana:");
-	t.Printx(0, "Heat:");
+	Character& c = w.GetCharacter();
+	t.Printx(0, "Hp  : " << c.Hp() << "/" << c.MaxHp());
+	t.Printx(0, "Mana: " << c.Mana() << "/" << c.MaxMana());
+	t.Printx(0, "Heat: " << c.Heat() << "/" << 100);
 	t.Print("");
-	t.Printx(0, "EnemyHp: ");
+	t.Printx(0, "EnemyHp: " << m->enemyHp);
 	t.Print("");
 	t.Printx(0, "[1] - Attack 1");
 	t.Printx(0, "[2] - Attack 2");
