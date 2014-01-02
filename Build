@@ -146,7 +146,7 @@ end
 
 create_bin_folder
 
-compile_project "datashatter", CC, client_CFLAGS
+compile_project "DataShatter", CC, client_CFLAGS
 
-link_project "datashatter", CC, client_LDFLAGS
+link_project "DataShatter", CC, client_LDFLAGS
 
