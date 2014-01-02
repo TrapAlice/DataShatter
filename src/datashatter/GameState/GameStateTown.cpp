@@ -1,4 +1,5 @@
 #include "GameStateTown.hpp"
+#include "GameStateBattle.hpp"
 #include "../Terminal.hpp"
 #include "../World.hpp"
 
@@ -17,4 +18,9 @@ void State_Town::Render()
 
 void State_Town::Update()
 {
+	switch( t.Key() ){
+		case '1':
+			s.push(NEW_STATE(Battle));
+			break;
+	}
 }
