@@ -2,13 +2,9 @@
 #include "libtcod.hpp"
 
 struct Terminal::PrivateVariables{
-	PrivateVariables()
-		: line(0)
-		, x(0)
-	{}
 	unique_ptr<TCODConsole> console;
-	int                line;
-	int                x;
+	int                line = 0;
+	int                x = 0;
 };
 
 Terminal::Terminal(string const& title)
@@ -17,6 +13,7 @@ Terminal::Terminal(string const& title)
 	m->console = std::unique_ptr<TCODConsole>(new TCODConsole(80, 25));
 	TCODConsole::setCustomFont("terminal.png", TCOD_FONT_LAYOUT_ASCII_INROW, 0, 0);
 	TCODConsole::initRoot(80, 25, title.c_str(), false);
+	TCODSystem::setFps(60);
 }
 
 Terminal::~Terminal(){}
@@ -39,7 +36,7 @@ bool Terminal::isClosed()
 char Terminal::Key()
 {
 	TCOD_key_t key;
-	TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL, true);
+	TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL, false);
 	return key.c;
 }
 
