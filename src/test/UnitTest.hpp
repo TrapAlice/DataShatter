@@ -30,6 +30,13 @@ extern UnitTest_t UnitTest;
 	if(!A){ printf("TEST_CHECK FAILED: %s:%d -- !%s\n",__FILE__, __LINE__, #A);\
 		UnitTest.Failed++; UnitTest.CurrentFailed++; }
 
+#define TEST_REQUIRE(A) UnitTest.Total++; UnitTest.CurrentTotal++;\
+	if(!A){ printf("TEST_REQUIRE FAILED: %s:%d -- !%s\n", __FILE__, __LINE__, #A);\
+		UnitTest.Failed++; UnitTest.CurrentFailed++;\
+		printf("Exiting %s test early\n", UnitTest.CurrentTest);\
+		TEST_END;\
+		return;}
+
 #define TEST_CLASS(CLASS)\
 	CLASS##_Test();
 
