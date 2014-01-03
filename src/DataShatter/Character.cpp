@@ -55,4 +55,5 @@ int Character::MaxHp() const { return m->maxHp; }
 int Character::Mana() const { return m->mana; }
 int Character::MaxMana() const { return m->maxMana; }
 int Character::Heat() const { return m->heat; }
+const vector<Item>& Character::Items() const { return m->items; }
 
