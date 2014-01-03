@@ -1,5 +1,7 @@
 #include "UnitTest.hpp"
 #include "DataShatter/Character.hpp"
+#include "DataShatter/Item.hpp"
+#include "DataShatter/ItemData.hpp"
 
 TEST(CharacterHp,
 	Character c;
@@ -50,5 +52,14 @@ TEST(CharacterHeat,
 
 	c.LoseHeat(100000);
 	TEST_EQ(c.Heat(), 0);
+)
+
+TEST(CharacterItems,
+	Character c;
+	auto& inventory = c.Items();
+	TEST_CHECK(inventory.empty());
+
+	ItemDataStore::AddItem({"Box", "", 0, 1});
+	c.GiveItem({ItemDataStore::GetData(0)});
 )
 
