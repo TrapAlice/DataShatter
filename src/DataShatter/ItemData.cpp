@@ -34,3 +34,8 @@ void ItemDataStore::ClearData()
 
 vector<ItemData> ItemDataStore::mItemData;
 
+ItemDataStore::~ItemDataStore()
+{
+	ClearData();
+}
+
