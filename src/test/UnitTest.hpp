@@ -53,10 +53,10 @@ extern UnitTest_t UnitTest;
 	UnitTest.CurrentTest   = #TEST;\
 	UnitTest.CurrentFailed = 0;\
 	UnitTest.CurrentTotal  = 0;\
-	printf("\n----- Beginning tests for %s -----\n", #TEST);
+	printf("----- Beginning tests for %s -----\n", #TEST);
 
 #define TEST_END\
-	printf("\nResults for: %s\n", UnitTest.CurrentTest);\
+	printf("Results for: %s\n", UnitTest.CurrentTest);\
 	printf("\t Tested: %d\n", UnitTest.CurrentTotal);\
 	printf("\t Passed: %d\n", UnitTest.CurrentTotal - UnitTest.CurrentFailed);\
 	printf("\t Failed: %d\n\n", UnitTest.CurrentFailed);
