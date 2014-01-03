@@ -27,5 +27,10 @@ ItemData const& ItemDataStore::GetData(int id)
 	return mItemData.at(id);
 }
 
+void ItemDataStore::ClearData()
+{
+	mItemData.clear();
+}
+
 vector<ItemData> ItemDataStore::mItemData;
 
