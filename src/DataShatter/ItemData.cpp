@@ -1,6 +1,6 @@
 #include "ItemData.hpp"
 
-ItemData::ItemData(string const& name, string const& info, ItemType type, int power, int maxDurability)
+ItemData::ItemData(string const& name, string const& info, int type, int power, int maxDurability)
 	: Name(name)
 	, Info(info)
 	, Type(type)
