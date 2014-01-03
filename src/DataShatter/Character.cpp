@@ -1,5 +1,6 @@
 #include "Character.hpp"
 #include "Item.hpp"
+#include "Equipment.hpp"
 
 struct Character::PrivateVariables{
 	int             hp = 50;
@@ -8,6 +9,7 @@ struct Character::PrivateVariables{
 	double          maxMana = 25;
 	double          heat = 0;
 	vector<Item>    items;
+	Equipment       equipment;
 };
 
 Character::Character()
@@ -50,10 +52,17 @@ void Character::GiveItem(Item item)
 	m->items.emplace_back(std::move(item));
 }
 
+void Character::Equip(Item const& item)
+{
+	m->equipment.Equip(item);
+}
+
 int Character::Hp() const { return m->hp; }
 int Character::MaxHp() const { return m->maxHp; }
 int Character::Mana() const { return m->mana; }
 int Character::MaxMana() const { return m->maxMana; }
 int Character::Heat() const { return m->heat; }
 const vector<Item>& Character::Items() const { return m->items; }
+Equipment& Character::GetEquipment() const { return m->equipment; }
+int Character::AttackBonus() const { return GetEquipment().AttackBonus(); }
 
