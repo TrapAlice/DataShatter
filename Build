@@ -91,7 +91,8 @@ def link_project project, compiler, flags, *additional_objects
 	if additional_objects != nil
 		for additional in additional_objects
 			Dir.glob(".obj/#{additional}/*.o") do |obj|
-				objects += " .obj/#{additional}/" + obj
+				next if File.basename(obj) == "main.o"
+				objects += obj + " "
 			end
 		end
 	end
@@ -109,11 +110,11 @@ def compile_project project, compiler, cflags
 end
 
 CC             = 'clang++'
-client_CFLAGS  = '-c -Wall -Iinclude -Isrc -ISDL -g -std=c++11'
-client_LDFLAGS = '-Llib -ltcod -ltcodxx -lsqlite3 -lSDL_net -Wl,-rpath=./lib'
+game_CFLAGS  = '-c -Wall -Iinclude -Isrc -ISDL -g -std=c++11'
+game_LDFLAGS = '-Llib -ltcod -ltcodxx -lsqlite3 -lSDL_net -Wl,-rpath=./lib'
 
-server_CFLAGS  = "-c -Wall -ISDL -Isrc -g -std=c++11"
-server_LDFLAGS = "-lsqlite3 -lSDL -lSDL_net -Wl,-rpath=./lib"
+test_CFLAGS  = "-c -Wall -ISDL -Isrc -g -std=c++11"
+test_LDFLAGS = '-Llib -ltcod -ltcodxx -lsqlite3 -lSDL_net -Wl,-rpath=./lib'
 
 options = {}
 
@@ -146,7 +147,9 @@ end
 
 create_bin_folder
 
-compile_project "DataShatter", CC, client_CFLAGS
+compile_project "DataShatter", CC, game_CFLAGS
+compile_project "test", CC, test_CFLAGS
 
-link_project "DataShatter", CC, client_LDFLAGS
+link_project "DataShatter", CC, game_LDFLAGS
+link_project "test", CC, test_LDFLAGS, "DataShatter"
 
