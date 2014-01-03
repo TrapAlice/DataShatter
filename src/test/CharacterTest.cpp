@@ -77,7 +77,7 @@ TEST(CharacterItems,
 TEST(CharacterEquip,
 	Character c;
 	ItemDataStore ids;
-	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon, 5, 5});
+	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon | ItemType::Hands, 5, 5});
 	c.GiveItem({ItemDataStore::GetData(0)});
 
 	auto& sword = c.Items()[0];
@@ -87,14 +87,14 @@ TEST(CharacterEquip,
 	TEST_REQUIRE(weapon);
 	TEST_EQ(weapon->Data().Name, "Sword");
 
-	TEST_EQ(c.AttackBonus(), 5);
+	TEST_EQ(c.Bonus(BonusType::Attack), 5);
 )
 
 TEST(CharacterMultiEquip,
 	Character c;
 	ItemDataStore ids;
-	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon, 5, 5});
-	ItemDataStore::AddItem({"Shield", "", ItemType::Armor, 2, 10});
+	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon | ItemType::Hands, 5, 5});
+	ItemDataStore::AddItem({"Shield", "", ItemType::Armor | ItemType::Hands, 2, 10});
 	c.GiveItem({ItemDataStore::GetData(0)});
 	c.GiveItem({ItemDataStore::GetData(1)});
 
@@ -109,7 +109,7 @@ TEST(CharacterMultiEquip,
 	TEST_EQ(weapon->Data().Name, "Sword");
 	TEST_EQ(shield->Data().Name, "Shield");
 
-	TEST_EQ(c.AttackBonus(), 5);
-	TEST_EQ(c.DefenseBonus(), 2);
+	TEST_EQ(c.Bonus(BonusType::Attack), 5);
+	TEST_EQ(c.Bonus(BonusType::Defense), 2);
 )
 

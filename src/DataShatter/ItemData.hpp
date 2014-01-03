@@ -7,6 +7,7 @@ enum ItemType{
 	Misc            = 0,
 	Weapon          = 1 << 1,
 	Armor           = 1 << 2,
+	Hands           = 1 << 3,
 };
 
 struct ItemData{

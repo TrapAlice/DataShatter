@@ -69,6 +69,5 @@ int Character::MaxMana() const { return m->maxMana; }
 int Character::Heat() const { return m->heat; }
 const vector<Item>& Character::Items() const { return m->items; }
 Equipment& Character::GetEquipment() const { return m->equipment; }
-int Character::AttackBonus() const { return GetEquipment().AttackBonus(); }
-int Character::DefenseBonus() const{ return GetEquipment().DefenseBonus(); }
+int Character::Bonus(BonusType type) const { return m->equipment.Bonus(type); }
 

@@ -6,6 +6,8 @@
 class Item;
 class Equipment;
 
+enum class BonusType;
+
 class Character{
 public:
 	Character();
@@ -27,8 +29,7 @@ public:
 	int             Heat() const;
 	vector<Item> const& Items() const;
 	Equipment&      GetEquipment() const;
-	int             AttackBonus() const;
-	int             DefenseBonus() const;
+	int             Bonus(BonusType) const;
 private:
 	HAS_PRIVATE_VARIABLES;
 };
