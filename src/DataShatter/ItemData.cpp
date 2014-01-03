@@ -1,9 +1,13 @@
 #include "ItemData.hpp"
 
-ItemData::ItemData(string const& name, string const& info, int type, int power, int maxDurability)
+ItemData::ItemData(string const& name, string const& info,
+	ItemType type, ItemSkill skill, ItemEquipSlot equipSlot,
+	int power, int maxDurability)
 	: Name(name)
 	, Info(info)
 	, Type(type)
+	, Skill(skill)
+	, EquipSlot(equipSlot)
 	, Power(power)
 	, MaxDurability(maxDurability)
 {}
@@ -13,8 +17,9 @@ ItemData::~ItemData(){}
 //To be changed in the future to use libtcod's data storage
 void ItemDataStore::LoadData()
 {
-#define ITEM(NAME, INFO, TYPE, POWER, DURABILITY) AddItem(ItemData(NAME, INFO, TYPE, POWER, DURABILITY));
-	ITEM("Sword", "It's sharp", ItemType::Weapon, 5, 10);
+#define ITEM(NAME, INFO, TYPE, SKILL, LOCATION,  POWER, DURABILITY)\
+	AddItem(ItemData(NAME, INFO, TYPE, SKILL, LOCATION, POWER, DURABILITY));
+	ITEM("Sword", "It's sharp", ItemType::Weapon, ItemSkill::Sword, ItemEquipSlot::Hand, 5, 10);
 #undef ITEM
 }
 

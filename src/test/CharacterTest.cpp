@@ -61,7 +61,7 @@ TEST(CharacterItems,
 	auto& inventory = c.Items();
 	TEST_CHECK(inventory.empty());
 
-	ItemDataStore::AddItem({"Box", "", ItemType::Misc, 0, 1});
+	ItemDataStore::AddItem({"Box", "", ItemType::Misc, ItemSkill::NA, ItemEquipSlot::NA, 0, 1});
 	c.GiveItem({ItemDataStore::GetData(0)});
 	TEST_CHECK(!inventory.empty());
 	TEST_EQ(inventory.size(), 1);
@@ -77,7 +77,7 @@ TEST(CharacterItems,
 TEST(CharacterEquip,
 	Character c;
 	ItemDataStore ids;
-	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon | ItemType::Hands, 5, 5});
+	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon, ItemSkill::Sword, ItemEquipSlot::Hand, 5, 5});
 	c.GiveItem({ItemDataStore::GetData(0)});
 
 	auto& sword = c.Items()[0];
@@ -93,8 +93,8 @@ TEST(CharacterEquip,
 TEST(CharacterMultiEquip,
 	Character c;
 	ItemDataStore ids;
-	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon | ItemType::Hands, 5, 5});
-	ItemDataStore::AddItem({"Shield", "", ItemType::Armor | ItemType::Hands, 2, 10});
+	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon, ItemSkill::Sword, ItemEquipSlot::Hand, 5, 5});
+	ItemDataStore::AddItem({"Shield", "", ItemType::Armor, ItemSkill::Shield,ItemEquipSlot::Hand, 2, 5});
 	c.GiveItem({ItemDataStore::GetData(0)});
 	c.GiveItem({ItemDataStore::GetData(1)});
 

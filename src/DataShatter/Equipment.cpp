@@ -17,12 +17,13 @@ Equipment::~Equipment()
 
 void Equipment::Equip(Item const& item)
 {
-	m->equipment[0] = &item;
+	if( item.Data().EquipSlot == ItemEquipSlot::Hand )
+		m->equipment[RIGHT_HAND] = &item;
 }
 
 void Equipment::Equip(Item const& item, int location)
 {
-	if( item.Data().Type & ItemType::Hands &&
+	if( item.Data().EquipSlot == ItemEquipSlot::Hand &&
 		!(location != RIGHT_HAND || location != LEFT_HAND))
 		return;
 	m->equipment[location] = &item;
@@ -41,11 +42,11 @@ int Equipment::Bonus(BonusType type)
 		if( !item ) continue;
 		switch( type ){
 			case BonusType::Attack:
-				if( !(item->Data().Type & ItemType::Weapon) )
+				if( !(item->Data().Type == ItemType::Weapon) )
 					continue;
 				break;
 			case BonusType::Defense:
-				if( !(item->Data().Type & ItemType::Armor) )
+				if( !(item->Data().Type == ItemType::Armor) )
 					continue;
 				break;
 		}
