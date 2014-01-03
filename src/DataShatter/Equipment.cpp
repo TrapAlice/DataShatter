@@ -54,27 +54,3 @@ int Equipment::Bonus(BonusType type)
 	return bonus;
 }
 
-int Equipment::AttackBonus()
-{
-	int bonus = 0;
-	for( int x = 0; x < EQUIPMENT_SLOTS; ++x ){
-		auto item = m->equipment[x];
-		if( !item ) continue;
-		if( item->Data().Type & ItemType::Weapon )
-			bonus += m->equipment[x]->Data().Power;
-	}
-	return bonus;
-}
-
-int Equipment::DefenseBonus()
-{
-	int bonus = 0;
-	for( int x = 0; x < EQUIPMENT_SLOTS; ++x){
-		auto item = m->equipment[x];
-		if( !item ) continue;
-		if( item->Data().Type & ItemType::Armor )
-			bonus += m->equipment[x]->Data().Power;
-	}
-	return bonus;
-}
-

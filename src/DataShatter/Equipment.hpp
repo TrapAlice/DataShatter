@@ -24,8 +24,6 @@ public:
 	void            Equip(Item const&, int location);
 	Item const*     Equipped(EquippedLocation);
 	int             Bonus(BonusType);
-	int             AttackBonus();
-	int             DefenseBonus();
 private:
 	HAS_PRIVATE_VARIABLES;
 };
