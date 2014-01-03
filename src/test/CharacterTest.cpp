@@ -90,3 +90,26 @@ TEST(CharacterEquip,
 	TEST_EQ(c.AttackBonus(), 5);
 )
 
+TEST(CharacterMultiEquip,
+	Character c;
+	ItemDataStore ids;
+	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon, 5, 5});
+	ItemDataStore::AddItem({"Shield", "", ItemType::Armor, 2, 10});
+	c.GiveItem({ItemDataStore::GetData(0)});
+	c.GiveItem({ItemDataStore::GetData(1)});
+
+	c.Equip(c.Items()[0]);
+	c.Equip(c.Items()[1], LEFT_HAND);
+	auto& equipment = c.GetEquipment();
+	auto weapon = equipment.Equipped(RIGHT_HAND);
+	auto shield = equipment.Equipped(LEFT_HAND);
+	
+	TEST_REQUIRE(weapon);
+	TEST_REQUIRE(shield);
+	TEST_EQ(weapon->Data().Name, "Sword");
+	TEST_EQ(shield->Data().Name, "Shield");
+
+	TEST_EQ(c.AttackBonus(), 5);
+	TEST_EQ(c.DefenseBonus(), 2);
+)
+
