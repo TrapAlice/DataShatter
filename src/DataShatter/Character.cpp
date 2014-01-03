@@ -57,6 +57,11 @@ void Character::Equip(Item const& item)
 	m->equipment.Equip(item);
 }
 
+void Character::Equip(Item const& item, int location)
+{
+	m->equipment.Equip(item, location);
+}
+
 int Character::Hp() const { return m->hp; }
 int Character::MaxHp() const { return m->maxHp; }
 int Character::Mana() const { return m->mana; }
@@ -65,4 +70,5 @@ int Character::Heat() const { return m->heat; }
 const vector<Item>& Character::Items() const { return m->items; }
 Equipment& Character::GetEquipment() const { return m->equipment; }
 int Character::AttackBonus() const { return GetEquipment().AttackBonus(); }
+int Character::DefenseBonus() const{ return GetEquipment().DefenseBonus(); }
 

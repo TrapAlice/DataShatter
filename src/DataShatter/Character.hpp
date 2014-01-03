@@ -19,6 +19,7 @@ public:
 	void            GenerateHeat(double amount);
 	void            GiveItem(Item);
 	void            Equip(Item const&);
+	void            Equip(Item const&, int EquippedLocation);
 	int             Hp() const;
 	int             MaxHp() const;
 	int             Mana() const;
@@ -27,6 +28,7 @@ public:
 	vector<Item> const& Items() const;
 	Equipment&      GetEquipment() const;
 	int             AttackBonus() const;
+	int             DefenseBonus() const;
 private:
 	HAS_PRIVATE_VARIABLES;
 };
