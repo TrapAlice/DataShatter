@@ -11,6 +11,11 @@ enum EquippedLocation{
 	EQUIPMENT_SLOTS,
 };
 
+enum class BonusType{
+	Attack,
+	Defense,
+};
+
 class Equipment{
 public:
 	Equipment();
@@ -18,6 +23,7 @@ public:
 	void            Equip(Item const&);
 	void            Equip(Item const&, int location);
 	Item const*     Equipped(EquippedLocation);
+	int             Bonus(BonusType);
 	int             AttackBonus();
 	int             DefenseBonus();
 private:
