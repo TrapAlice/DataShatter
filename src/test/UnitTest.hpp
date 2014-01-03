@@ -43,7 +43,7 @@ extern UnitTest_t UnitTest;
 			UnitTest.AddTest(Test_##TEST);\
 		}\
 	};\
-	Test_Struct_##TEST t;
+	Test_Struct_##TEST TEST##_t;
 
 #define TEST_BEGIN(TEST)\
 	UnitTest.CurrentTest   = #TEST;\
