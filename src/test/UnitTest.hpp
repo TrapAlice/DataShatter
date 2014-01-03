@@ -23,7 +23,11 @@ extern UnitTest_t UnitTest;
 		UnitTest.Failed++; UnitTest.CurrentFailed++; }
 
 #define TEST_NEQ(A, B) UnitTest.Total++; UnitTest.CurrentTotal++;\
-	if(A == B){ printf("TEST_EQ FAILED: %s:%d -- %s == %s\n",__FILE__, __LINE__, #A, #B);\
+	if(A == B){ printf("TEST_NEQ FAILED: %s:%d -- %s == %s\n",__FILE__, __LINE__, #A, #B);\
+		UnitTest.Failed++; UnitTest.CurrentFailed++; }
+
+#define TEST_CHECK(A) UnitTest.Total++; UnitTest.CurrentTotal++;\
+	if(!A){ printf("TEST_CHECK FAILED: %s:%d -- !%s\n",__FILE__, __LINE__, #A);\
 		UnitTest.Failed++; UnitTest.CurrentFailed++; }
 
 #define TEST_CLASS(CLASS)\
