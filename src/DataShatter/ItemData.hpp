@@ -15,6 +15,7 @@ struct ItemData{
 class ItemDataStore{
 public:
 	static void     LoadData();
+	static void     AddItem(ItemData const&);
 	static ItemData const& GetData(int id);
 private:
 	static vector<ItemData> mItemData;

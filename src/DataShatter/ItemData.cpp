@@ -12,9 +12,14 @@ ItemData::~ItemData(){}
 //To be changed in the future to use libtcod's data storage
 void ItemDataStore::LoadData()
 {
-#define ITEM(NAME, INFO, POWER, DURABILITY) mItemData.push_back(ItemData(NAME, INFO, POWER, DURABILITY));
+#define ITEM(NAME, INFO, POWER, DURABILITY) AddItem(ItemData(NAME, INFO, POWER, DURABILITY));
 	ITEM("Sword", "It's sharp", 5, 10);
 #undef ITEM
+}
+
+void ItemDataStore::AddItem(ItemData const& data)
+{
+	mItemData.push_back(data);
 }
 
 ItemData const& ItemDataStore::GetData(int id)
