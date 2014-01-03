@@ -2,6 +2,7 @@
 #include "DataShatter/Character.hpp"
 #include "DataShatter/Item.hpp"
 #include "DataShatter/ItemData.hpp"
+#include "DataShatter/Equipment.hpp"
 
 TEST(CharacterHp,
 	Character c;
@@ -56,10 +57,36 @@ TEST(CharacterHeat,
 
 TEST(CharacterItems,
 	Character c;
+	ItemDataStore::ClearData();
 	auto& inventory = c.Items();
 	TEST_CHECK(inventory.empty());
 
 	ItemDataStore::AddItem({"Box", "", 0, 1});
 	c.GiveItem({ItemDataStore::GetData(0)});
+	TEST_CHECK(!inventory.empty());
+	TEST_EQ(inventory.size(), 1);
+
+	auto itemName = inventory[0].Data().Name;
+	TEST_EQ(itemName, "Box");
+	
+	for( int x = 0; x < 5; ++x ) c.GiveItem({ItemDataStore::GetData(0)});
+	TEST_EQ(inventory.size(), 6);
+	TEST_EQ(inventory[0].Data().Name, "Box");
+)
+
+TEST(CharacterEquip,
+	Character c;
+	ItemDataStore::ClearData();
+	ItemDataStore::AddItem({"Sword", "", 5, 5});
+	c.GiveItem({ItemDataStore::GetData(0)});
+
+	auto& sword = c.Items()[0];
+	c.Equip(sword);
+	auto& equipment = c.GetEquipment();
+	auto weapon = equipment.Equipped(RIGHT_HAND);
+	TEST_REQUIRE(weapon);
+	TEST_EQ(weapon->Data().Name, "Sword");
+
+	TEST_EQ(c.AttackBonus(), 5);
 )
 
