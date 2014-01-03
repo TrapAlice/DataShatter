@@ -33,7 +33,7 @@ extern UnitTest_t UnitTest;
 #define TEST_REQUIRE(A) UnitTest.Total++; UnitTest.CurrentTotal++;\
 	if(!A){ printf("TEST_REQUIRE FAILED: %s:%d -- !%s\n", __FILE__, __LINE__, #A);\
 		UnitTest.Failed++; UnitTest.CurrentFailed++;\
-		printf("Exiting %s test early\n", UnitTest.CurrentTest);\
+		printf("Exiting Test %s early\n", UnitTest.CurrentTest);\
 		TEST_END;\
 		return;}
 
