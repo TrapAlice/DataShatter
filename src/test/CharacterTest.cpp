@@ -57,11 +57,11 @@ TEST(CharacterHeat,
 
 TEST(CharacterItems,
 	Character c;
-	ItemDataStore::ClearData();
+	ItemDataStore ids;
 	auto& inventory = c.Items();
 	TEST_CHECK(inventory.empty());
 
-	ItemDataStore::AddItem({"Box", "", 0, 1});
+	ItemDataStore::AddItem({"Box", "", ItemType::Misc, 0, 1});
 	c.GiveItem({ItemDataStore::GetData(0)});
 	TEST_CHECK(!inventory.empty());
 	TEST_EQ(inventory.size(), 1);
@@ -76,8 +76,8 @@ TEST(CharacterItems,
 
 TEST(CharacterEquip,
 	Character c;
-	ItemDataStore::ClearData();
-	ItemDataStore::AddItem({"Sword", "", 5, 5});
+	ItemDataStore ids;
+	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon, 5, 5});
 	c.GiveItem({ItemDataStore::GetData(0)});
 
 	auto& sword = c.Items()[0];

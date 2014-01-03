@@ -3,11 +3,18 @@
 
 #include "common.hpp"
 
+enum class ItemType{
+	Misc            = 0,
+	Weapon          = 1 << 1,
+	Armor           = 1 << 2,
+};
+
 struct ItemData{
-	ItemData(string const& name, string const& info, int power, int maxDurability);
+	ItemData(string const& name, string const& info, ItemType, int power, int maxDurability);
 	~ItemData();
 	string          Name;
 	string          Info;
+	ItemType        Type;
 	int             Power;
 	int             MaxDurability;
 };
