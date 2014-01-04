@@ -25,7 +25,6 @@ public:
 	void            Equip(Item const&, int location);
 	Item const*     Equipped(EquippedLocation);
 	int             Bonus(BonusType);
-	std::array<Ability const*, 4> GetWeaponAbilities();
 private:
 	HAS_PRIVATE_VARIABLES;
 };

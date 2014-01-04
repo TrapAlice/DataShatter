@@ -10,9 +10,9 @@ enum class ItemType{
 };
 
 enum class ItemSkill{
-	NA,
 	Sword,
 	Shield,
+	NA,
 };
 
 enum class ItemEquipSlot{

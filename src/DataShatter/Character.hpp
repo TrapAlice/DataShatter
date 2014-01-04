@@ -8,6 +8,7 @@ class Equipment;
 class Ability;
 
 enum class BonusType;
+enum class ItemSkill;
 
 class Character{
 public:
@@ -23,6 +24,7 @@ public:
 	void            GiveItem(Item);
 	void            Equip(Item const&);
 	void            Equip(Item const&, int EquippedLocation);
+	void            ChangeWeaponAbilities(ItemSkill const, int EquippedLocation);
 	int             Hp() const;
 	int             MaxHp() const;
 	int             Mana() const;

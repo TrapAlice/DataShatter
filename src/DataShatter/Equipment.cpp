@@ -56,36 +56,3 @@ int Equipment::Bonus(BonusType type)
 	return bonus;
 }
 
-std::array<Ability const*, 4> Equipment::GetWeaponAbilities()
-{
-	std::array<Ability const*, 4> abilities;
-	switch( m->equipment[RIGHT_HAND]->Data().Skill ){
-		case ItemSkill::Sword:
-			abilities[0] = &AbilityStore::GetAbility(Sword01);
-			abilities[1] = &AbilityStore::GetAbility(Sword02);
-			break;
-		case ItemSkill::Shield:
-			abilities[0] = &AbilityStore::GetAbility(Shield01);
-			abilities[1] = &AbilityStore::GetAbility(Shield02);
-			break;
-	}
-	switch( m->equipment[LEFT_HAND]->Data().Skill) {
-		case ItemSkill::Sword:
-			abilities[2] = &AbilityStore::GetAbility(Sword03);
-			switch( m->equipment[RIGHT_HAND]->Data().Skill ) {
-				case ItemSkill::Shield:
-				break;
-			}
-			break;
-		case ItemSkill::Shield:
-			abilities[2] = &AbilityStore::GetAbility(Shield03);
-			switch( m->equipment[RIGHT_HAND]->Data().Skill ) {
-				case ItemSkill::Sword:
-					abilities[3] = &AbilityStore::GetAbility(SwordShield);
-					break;
-			}
-			break;
-	}
-	return abilities;
-}
-
