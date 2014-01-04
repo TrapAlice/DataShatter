@@ -1,18 +1,18 @@
 #include "Ability.hpp"
 
-struct Ability::PrivateVariables{
+PRIVATE_VARIABLES(Ability,
 	PrivateVariables(string const& name)
 		: Name(name)
 	{}
 	string          Name;
-};
+);
 
 Ability::Ability(string const& name)
-	: INIT_PRIVATE_VARIABLES_WITH(name)
+	: INIT_PRIVATE_VARIABLES(name)
 {}
 
 Ability::Ability(Ability&& s) noexcept
-	: INIT_PRIVATE_VARIABLES_WITH(s.m->Name)
+	: INIT_PRIVATE_VARIABLES(s.m->Name)
 {
 
 }

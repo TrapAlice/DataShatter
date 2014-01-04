@@ -4,14 +4,14 @@
 #include "Terminal.hpp"
 #include "World.hpp"
 
-struct Game::PrivateVariables{
+PRIVATE_VARIABLES(Game,
 	unique_ptr<Terminal> terminal;
 	unique_ptr<World> world;
 	stack<unique_ptr<iGameState>> stateStack;
-};
+);
 
 Game::Game()
-	: INIT_PRIVATE_VARIABLES 
+	: INIT_PRIVATE_VARIABLES()
 {
 	m->terminal = unique_ptr<Terminal>(new Terminal("Data Shatter"));
 	m->world = unique_ptr<World>(new World());

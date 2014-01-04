@@ -10,7 +10,7 @@ struct Equipment::PrivateVariables{
 };
 
 Equipment::Equipment()
-	: INIT_PRIVATE_VARIABLES
+	: INIT_PRIVATE_VARIABLES()
 {}
 
 Equipment::~Equipment()

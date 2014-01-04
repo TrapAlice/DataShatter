@@ -1,12 +1,12 @@
 #include "World.hpp"
 #include "Character.hpp"
 
-struct World::PrivateVariables{
+PRIVATE_VARIABLES(World,
 	unique_ptr<Character> character;
-};
+);
 
 World::World()
-	: INIT_PRIVATE_VARIABLES
+	: INIT_PRIVATE_VARIABLES()
 {
 	m->character = unique_ptr<Character>(new Character());
 }

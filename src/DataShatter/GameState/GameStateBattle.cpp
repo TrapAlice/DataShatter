@@ -4,13 +4,13 @@
 #include "../Terminal.hpp"
 #include "../World.hpp"
 
-struct State_Battle::PrivateVariables{
+PRIVATE_VARIABLES(State_Battle,
 	int             enemyHp = 100;
-};
+);
 
 State_Battle::State_Battle(Terminal& t, GameStateStack& s, World& w)
 	: iGameState(t,s,w)
-	, INIT_PRIVATE_VARIABLES
+	, INIT_PRIVATE_VARIABLES()
 {
 }
 
