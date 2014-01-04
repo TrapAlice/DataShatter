@@ -30,5 +30,6 @@ typedef std::chrono::time_point<std::chrono::system_clock> Time;
 #define HAS_PRIVATE_VARIABLES struct PrivateVariables; unique_ptr<PrivateVariables> m;
 #define INIT_PRIVATE_VARIABLES m(new PrivateVariables())
 #define INIT_PRIVATE_VARIABLES_WITH(...) m(new PrivateVariables(__VA_ARGS__))
+#define HAS_PRIVATE_FUNCTIONS class Private; friend Private;
 
 #endif
