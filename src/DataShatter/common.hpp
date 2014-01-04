@@ -35,16 +35,16 @@ typedef std::chrono::time_point<std::chrono::system_clock> Time;
 	};
 #define INIT_PRIVATE_VARIABLES(...) m(new PrivateVariables(__VA_ARGS__))
 
-#define HAS_PRIVATE_FUNCTIONS class Private; friend Private;
+#define HAS_PRIVATE_FUNCTIONS class PrivateFunctions; friend PrivateFunctions;
 #define PRIVATE_FUNCTIONS(CLASS, ...)\
 	using PrivateClassType = CLASS;\
-	class CLASS::Private{\
+	class CLASS::PrivateFunctions{\
 	public:\
 		__VA_ARGS__\
 	};
 #define PRIVATE_FUNCTION_DECLARE(RETURN, NAME, ...)\
 	static RETURN NAME(PrivateClassType* This, ##__VA_ARGS__)
 #define PRIVATE_FUNCTION_DEFINE(...) { __VA_ARGS__ }
-#define PRIVATE(FUNCTION, ...) Private::FUNCTION(this, ##__VA_ARGS__);
+#define PRIVATE(FUNCTION, ...) PrivateFunctions::FUNCTION(this, ##__VA_ARGS__);
 
 #endif
