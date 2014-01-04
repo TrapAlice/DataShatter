@@ -24,7 +24,6 @@ public:
 	void            GiveItem(Item);
 	void            Equip(Item const&);
 	void            Equip(Item const&, int EquippedLocation);
-	void            ChangeWeaponAbilities(ItemSkill const, int EquippedLocation);
 	int             Hp() const;
 	int             MaxHp() const;
 	int             Mana() const;
@@ -36,6 +35,8 @@ public:
 	std::array<Ability const*, 8> GetAbilities() const;
 private:
 	HAS_PRIVATE_VARIABLES;
+	HAS_PRIVATE_FUNCTIONS;
+	//void            ChangeWeaponAbilities(ItemSkill const, int EquippedLocation);
 };
 
 #endif
