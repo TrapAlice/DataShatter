@@ -12,6 +12,7 @@
 #include <stack>
 #include <map>
 #include <chrono>
+#include <array>
 
 using std::string;
 using std::vector;

@@ -62,6 +62,17 @@ void Character::Equip(Item const& item, int location)
 	m->equipment.Equip(item, location);
 }
 
+std::array<Ability const*, 8> Character::GetAbilities() const
+{
+	std::array<Ability const*, 8> abilities;
+	auto weaponAbilities = m->equipment.GetWeaponAbilities();
+	abilities[0] = weaponAbilities[0];	
+	abilities[1] = weaponAbilities[1];	
+	abilities[2] = weaponAbilities[2];	
+	abilities[3] = weaponAbilities[3];	
+	return abilities;
+}
+
 int Character::Hp() const { return m->hp; }
 int Character::MaxHp() const { return m->maxHp; }
 int Character::Mana() const { return m->mana; }

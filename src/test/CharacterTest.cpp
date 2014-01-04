@@ -3,6 +3,7 @@
 #include "DataShatter/Item.hpp"
 #include "DataShatter/ItemData.hpp"
 #include "DataShatter/Equipment.hpp"
+#include "DataShatter/Ability.hpp"
 
 TEST(CharacterHp,
 	Character c;
@@ -111,5 +112,26 @@ TEST(CharacterMultiEquip,
 
 	TEST_EQ(c.Bonus(BonusType::Attack), 5);
 	TEST_EQ(c.Bonus(BonusType::Defense), 2);
+)
+
+TEST(CharacterEquippedSkills,
+	Character c;
+	ItemDataStore ids;
+	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon, ItemSkill::Sword, ItemEquipSlot::Hand, 5, 5});
+	ItemDataStore::AddItem({"Shield", "", ItemType::Armor, ItemSkill::Shield,ItemEquipSlot::Hand, 2, 5});
+	c.GiveItem({ItemDataStore::GetData(0)});
+	c.GiveItem({ItemDataStore::GetData(1)});
+	c.Equip(c.Items()[0]);
+	c.Equip(c.Items()[1], LEFT_HAND);
+	
+	auto abilities = c.GetAbilities();
+	TEST_REQUIRE(abilities[0]);
+	TEST_REQUIRE(abilities[1]);
+	TEST_REQUIRE(abilities[2]);
+	TEST_REQUIRE(abilities[3]);
+	TEST_EQ(abilities[0]->Name(), "Sword-Skill01");
+	TEST_EQ(abilities[1]->Name(), "Sword-Skill02");
+	TEST_EQ(abilities[2]->Name(), "Shield-Skill03");
+	TEST_EQ(abilities[3]->Name(), "SwordShield-Skill");
 )
 

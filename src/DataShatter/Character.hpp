@@ -5,6 +5,7 @@
 
 class Item;
 class Equipment;
+class Ability;
 
 enum class BonusType;
 
@@ -30,6 +31,7 @@ public:
 	vector<Item> const& Items() const;
 	Equipment&      GetEquipment() const;
 	int             Bonus(BonusType) const;
+	std::array<Ability const*, 8> GetAbilities() const;
 private:
 	HAS_PRIVATE_VARIABLES;
 };
