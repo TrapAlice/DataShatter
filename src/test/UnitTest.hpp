@@ -1,16 +1,17 @@
 #ifndef UNITTEST_HPP
 #define UNITTEST_HPP
 
-#include <cstdio>
 #include <functional>
 #include <vector>
+#include <iostream>
+#include <string>
 
 struct UnitTest_t{
 	 int Failed = 0;
 	 int Total = 0;
 	 int CurrentFailed;
 	 int CurrentTotal;
-	 char const* CurrentTest;
+	 std::string CurrentTest;
 	 std::vector<std::function<void()>> Tests;
 	 void AddTest(std::function<void()> test){
 		Tests.push_back(test);
@@ -19,21 +20,27 @@ struct UnitTest_t{
 extern UnitTest_t UnitTest;
 
 #define TEST_EQ(A, B) UnitTest.Total++; UnitTest.CurrentTotal++;\
-	if(A != B){ printf("TEST_EQ FAILED: %s:%d -- %s != %s\n",__FILE__, __LINE__, #A, #B);\
+	if(A != B){ std::cerr << "TEST_EQ FAILED: " << __FILE__ << ":" << __LINE__\
+		                  << " -- " << #A << " != " << #B << std::endl\
+	                      << "\t" << #A << " == " << A  << std::endl;\
 		UnitTest.Failed++; UnitTest.CurrentFailed++; }
 
 #define TEST_NEQ(A, B) UnitTest.Total++; UnitTest.CurrentTotal++;\
-	if(A == B){ printf("TEST_NEQ FAILED: %s:%d -- %s == %s\n",__FILE__, __LINE__, #A, #B);\
+	if(A == B){ std::cerr << "TEST_NEQ FAILED: " << __FILE__ << ":" << __LINE__\
+		                  << " -- " << #A << " == " << #B << std::endl\
+	                      << "\t" << #A << " != " << A  << std::endl;\
 		UnitTest.Failed++; UnitTest.CurrentFailed++; }
 
 #define TEST_CHECK(A) UnitTest.Total++; UnitTest.CurrentTotal++;\
-	if(!A){ printf("TEST_CHECK FAILED: %s:%d -- !%s\n",__FILE__, __LINE__, #A);\
+	if(!A){     std::cerr << "TEST_CHECK FAILED: " << __FILE__ << ":" << __LINE__\
+		                  << " -- !" << #A << std::endl;\
 		UnitTest.Failed++; UnitTest.CurrentFailed++; }
 
 #define TEST_REQUIRE(A) UnitTest.Total++; UnitTest.CurrentTotal++;\
-	if(!A){ printf("TEST_REQUIRE FAILED: %s:%d -- !%s\n", __FILE__, __LINE__, #A);\
+	if(!A){     std::cerr << "TEST_REQUIRE FAILED: " << __FILE__ << ":" << __LINE__\
+		                  << " -- !" << #A << std::endl\
+						  << "Exiting Test " << UnitTest.CurrentTest << " early\n";\
 		UnitTest.Failed++; UnitTest.CurrentFailed++;\
-		printf("Exiting Test %s early\n", UnitTest.CurrentTest);\
 		TEST_END;\
 		return;}
 
@@ -60,13 +67,13 @@ extern UnitTest_t UnitTest;
 	UnitTest.CurrentTest   = #TEST;\
 	UnitTest.CurrentFailed = 0;\
 	UnitTest.CurrentTotal  = 0;\
-	printf("----- Beginning tests for %s -----\n", #TEST);
+	std::cout << "----- Beginning tests for " << #TEST << " -----\n"
 
 #define TEST_END\
-	printf("----- Results for         %s -----\n", UnitTest.CurrentTest);\
-	printf("\t Tested: %d\n", UnitTest.CurrentTotal);\
-	printf("\t Passed: %d\n", UnitTest.CurrentTotal - UnitTest.CurrentFailed);\
-	printf("\t Failed: %d\n\n", UnitTest.CurrentFailed);
+	std::cout << "----- Results for         " << UnitTest.CurrentTest <<" -----\n"\
+	          << "\tTested: " << UnitTest.CurrentTotal << std::endl\
+			  << "\tPassed: " << UnitTest.CurrentTotal - UnitTest.CurrentFailed << std::endl\
+			  << "\tFailed: " << UnitTest.CurrentFailed << std::endl << std::endl;
 
 #define TESTS_RUN\
 	for( auto const& t : UnitTest.Tests ){\
@@ -74,9 +81,9 @@ extern UnitTest_t UnitTest;
 	}
 
 #define TEST_RESULTS_OVERALL \
-	printf("Total Tested: %d\n", UnitTest.Total);\
-	printf("Total Passed: %d\n", UnitTest.Total - UnitTest.Failed);\
-	printf("Total Failed: %d\n\n", UnitTest.Failed);
+	std::cout << "Total Tested: " << UnitTest.Total << std::endl\
+	          << "Total Passed: " << UnitTest.Total - UnitTest.Failed << std::endl\
+			  << "Total Failed: " << UnitTest.Failed << std::endl << std::endl;
 
 #endif
 
