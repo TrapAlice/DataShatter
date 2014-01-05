@@ -5,6 +5,11 @@
 #include "DataShatter/Equipment.hpp"
 #include "DataShatter/Ability.hpp"
 
+namespace{
+	ItemData sword{"Sword", "", ItemType::Weapon, ItemSkill::Sword, ItemEquipSlot::Hand, 5, 5};
+	ItemData shield{"Shield", "", ItemType::Armor, ItemSkill::Shield,ItemEquipSlot::Hand, 2, 5};
+}
+
 TEST(CharacterHp,
 	Character c;
 	TEST_EQ(c.Hp(), c.MaxHp());
@@ -78,7 +83,7 @@ TEST(CharacterItems,
 TEST(CharacterEquip,
 	Character c;
 	ItemDataStore ids;
-	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon, ItemSkill::Sword, ItemEquipSlot::Hand, 5, 5});
+	ItemDataStore::AddItem(sword);
 	c.GiveItem({ItemDataStore::GetData(0)});
 
 	auto& sword = c.Items()[0];
@@ -94,8 +99,8 @@ TEST(CharacterEquip,
 TEST(CharacterMultiEquip,
 	Character c;
 	ItemDataStore ids;
-	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon, ItemSkill::Sword, ItemEquipSlot::Hand, 5, 5});
-	ItemDataStore::AddItem({"Shield", "", ItemType::Armor, ItemSkill::Shield,ItemEquipSlot::Hand, 2, 5});
+	ItemDataStore::AddItem(sword);
+	ItemDataStore::AddItem(shield);
 	c.GiveItem({ItemDataStore::GetData(0)});
 	c.GiveItem({ItemDataStore::GetData(1)});
 
@@ -117,8 +122,8 @@ TEST(CharacterMultiEquip,
 TEST(CharacterEquippedSkills,
 	Character c;
 	ItemDataStore ids;
-	ItemDataStore::AddItem({"Sword", "", ItemType::Weapon, ItemSkill::Sword, ItemEquipSlot::Hand, 5, 5});
-	ItemDataStore::AddItem({"Shield", "", ItemType::Armor, ItemSkill::Shield,ItemEquipSlot::Hand, 2, 5});
+	ItemDataStore::AddItem(sword);
+	ItemDataStore::AddItem(shield);
 	c.GiveItem({ItemDataStore::GetData(0)});
 	c.GiveItem({ItemDataStore::GetData(1)});
 	c.Equip(c.Items()[0]);
