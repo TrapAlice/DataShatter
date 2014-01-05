@@ -27,8 +27,14 @@ void AbilityStore::LoadAbilities()
 #define ABILITY(ID, NAME) AddAbility(ID, new Ability(NAME));
 	ABILITY(Sword01, "Sword-Skill01");
 	ABILITY(Sword02, "Sword-Skill02");
-	ABILITY(Shield03, "Shield-Skill03");
+	ABILITY(Sword03, "Sword-Skill03");
+	ABILITY(SwordSword, "SwordSword-Skill");
 	ABILITY(SwordShield, "SwordShield-Skill");
+	ABILITY(Shield01, "Shield-Skill01");
+	ABILITY(Shield02, "Shield-Skill02");
+	ABILITY(Shield03, "Shield-Skill03");
+	ABILITY(ShieldSword, "ShieldSword-Skill");
+	ABILITY(ShieldShield, "ShieldShield-Skill");
 #undef ABILITY
 	mAbilitiesLoaded = true;
 }

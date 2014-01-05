@@ -10,8 +10,8 @@ enum AbilityId{
 	Shield01,
 	Shield02,
 	Shield03,
-	ShieldShield,
 	ShieldSword,
+	ShieldShield,
 	TOTAL
 };
 
