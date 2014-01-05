@@ -140,3 +140,33 @@ TEST(CharacterEquippedSkills,
 	TEST_EQ(abilities[3]->Name(), "SwordShield-Skill");
 )
 
+TEST(CharacterSwappingEquippedSkills,
+	Character c;
+	ItemDataStore ids;
+	ItemDataStore::AddItem(sword);
+	ItemDataStore::AddItem(shield);
+	c.GiveItem({ItemDataStore::GetData(0)});
+	c.GiveItem({ItemDataStore::GetData(0)});
+	c.GiveItem({ItemDataStore::GetData(1)});
+	c.Equip(c.Items()[0]);
+	c.Equip(c.Items()[1], LEFT_HAND);
+
+	auto abilities = c.GetAbilities();
+	TEST_EQ(abilities[2]->Name(), "Sword-Skill03");
+	TEST_EQ(abilities[3]->Name(), "SwordSword-Skill");
+
+	c.Equip(c.Items()[2], LEFT_HAND);
+	abilities = c.GetAbilities();
+	TEST_EQ(abilities[2]->Name(), "Shield-Skill03");
+	TEST_EQ(abilities[3]->Name(), "SwordShield-Skill");
+
+	c.Equip(c.Items()[2], RIGHT_HAND);
+	c.Equip(c.Items()[0], LEFT_HAND);
+	abilities = c.GetAbilities();
+	TEST_EQ(abilities[0]->Name(), "Shield-Skill01");
+	TEST_EQ(abilities[1]->Name(), "Shield-Skill02");
+	TEST_EQ(abilities[2]->Name(), "Sword-Skill03");
+	TEST_EQ(abilities[3]->Name(), "ShieldSword-Skill");
+
+)
+

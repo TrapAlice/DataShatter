@@ -18,12 +18,12 @@ PRIVATE_VARIABLES(Character,
 PRIVATE_FUNCTIONS(Character,
 	PRIVATE_FUNCTION_DECLARE(void, ChangeWeaponAbilities, ItemSkill const skill, int location)
 	PRIVATE_FUNCTION_DEFINE(
+		int offset = 3 + static_cast<int>(ItemSkill::NA);
 		if( location == RIGHT_HAND ){
-			This->m->abilities[0] = &AbilityStore::GetAbility(static_cast<int>(skill)*3);
-			This->m->abilities[1] = &AbilityStore::GetAbility(static_cast<int>(skill)*3 + 1);
+			This->m->abilities[0] = &AbilityStore::GetAbility(static_cast<int>(skill)*offset);
+			This->m->abilities[1] = &AbilityStore::GetAbility(static_cast<int>(skill)*offset + 1);
 		} else if( location == LEFT_HAND ) {
-			This->m->abilities[2] = &AbilityStore::GetAbility(static_cast<int>(skill)*3 +
-				static_cast<int>(ItemSkill::NA) + 2);
+			This->m->abilities[2] = &AbilityStore::GetAbility(static_cast<int>(skill)*offset + 2);
 		} else return;
 
 		//Get the skills type of the item held in the left and right hand
@@ -34,8 +34,8 @@ PRIVATE_FUNCTIONS(Character,
 		auto right_id    = static_cast<int>(right_skill);
 		auto left_id     = static_cast<int>(left_skill);
 
-		This->m->abilities[3] = &AbilityStore::GetAbility((right_id * 3) +
-			static_cast<int>(ItemSkill::NA) + (left_id + 1));
+		This->m->abilities[3] =
+		    &AbilityStore::GetAbility((right_id * offset) + 3 + left_id);
 	);
 );
 
