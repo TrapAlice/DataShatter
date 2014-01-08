@@ -10,7 +10,7 @@ namespace{
 	ItemData shield{"Shield", "", ItemType::Armor, ItemSkill::Shield,ItemEquipSlot::Hand, 2, 5};
 }
 
-TEST(CharacterHp,
+TEST(CharacterHp){
 	Character c;
 	TEST_EQ(c.Hp(), c.MaxHp());
 	c.TakeDamage(10);
@@ -25,9 +25,9 @@ TEST(CharacterHp,
 
 	c.RecoverHealth(100000);
 	TEST_EQ(c.Hp(), c.MaxHp());
-)
+}
 
-TEST(CharacterMana,
+TEST(CharacterMana){
 	Character c;
 	TEST_EQ(c.Mana(), c.MaxMana());
 	c.UseMana(10);
@@ -42,9 +42,9 @@ TEST(CharacterMana,
 
 	c.GainMana(100000);
 	TEST_EQ(c.Mana(), c.MaxMana());
-)
+}
 
-TEST(CharacterHeat,
+TEST(CharacterHeat){
 	Character c;
 	TEST_EQ(c.Heat(), 0);
 
@@ -59,9 +59,9 @@ TEST(CharacterHeat,
 
 	c.LoseHeat(100000);
 	TEST_EQ(c.Heat(), 0);
-)
+}
 
-TEST(CharacterItems,
+TEST(CharacterItems){
 	Character c;
 	ItemDataStore ids;
 	auto& inventory = c.Items();
@@ -78,9 +78,9 @@ TEST(CharacterItems,
 	for( int x = 0; x < 5; ++x ) c.GiveItem({ItemDataStore::GetData(0)});
 	TEST_EQ(inventory.size(), 6);
 	TEST_EQ(inventory[0].Data().Name, "Box");
-)
+}
 
-TEST(CharacterEquip,
+TEST(CharacterEquip){
 	Character c;
 	ItemDataStore ids;
 	ItemDataStore::AddItem(sword);
@@ -94,9 +94,9 @@ TEST(CharacterEquip,
 	TEST_EQ(weapon->Data().Name, "Sword");
 
 	TEST_EQ(c.Bonus(BonusType::Attack), 5);
-)
+}
 
-TEST(CharacterMultiEquip,
+TEST(CharacterMultiEquip){
 	Character c;
 	ItemDataStore ids;
 	ItemDataStore::AddItem(sword);
@@ -117,9 +117,9 @@ TEST(CharacterMultiEquip,
 
 	TEST_EQ(c.Bonus(BonusType::Attack), 5);
 	TEST_EQ(c.Bonus(BonusType::Defense), 2);
-)
+}
 
-TEST(CharacterEquippedSkills,
+TEST(CharacterEquippedSkills){
 	Character c;
 	ItemDataStore ids;
 	ItemDataStore::AddItem(sword);
@@ -138,9 +138,9 @@ TEST(CharacterEquippedSkills,
 	TEST_EQ(abilities[1]->Name(), "Sword-Skill02");
 	TEST_EQ(abilities[2]->Name(), "Shield-Skill03");
 	TEST_EQ(abilities[3]->Name(), "SwordShield-Skill");
-)
+}
 
-TEST(CharacterSwappingEquippedSkills,
+TEST(CharacterSwappingEquippedSkills){
 	Character c;
 	ItemDataStore ids;
 	ItemDataStore::AddItem(sword);
@@ -167,6 +167,5 @@ TEST(CharacterSwappingEquippedSkills,
 	TEST_EQ(abilities[1]->Name(), "Shield-Skill02");
 	TEST_EQ(abilities[2]->Name(), "Sword-Skill03");
 	TEST_EQ(abilities[3]->Name(), "ShieldSword-Skill");
-
-)
+}
 

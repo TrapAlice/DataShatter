@@ -50,18 +50,15 @@ extern UnitTest_t UnitTest;
 #define TEST_LOAD(TEST)\
 	UnitTest.AddTest(Test_##TEST);
 
-#define TEST(TEST, ...)\
+#define TEST(TEST)\
+	void Test_##TEST();\
 	struct Test_Struct_##TEST{\
-		static void Test_##TEST(){\
-			TEST_BEGIN(TEST);\
-			__VA_ARGS__\
-			TEST_END;\
-		}\
 		Test_Struct_##TEST(){\
 			UnitTest.AddTest(Test_##TEST);\
 		}\
 	};\
-	Test_Struct_##TEST TEST##_t;
+	Test_Struct_##TEST TEST##_t;\
+	void Test_##TEST()
 
 #define TEST_BEGIN(TEST)\
 	UnitTest.CurrentTest   = #TEST;\
