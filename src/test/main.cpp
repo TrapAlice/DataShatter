@@ -1,5 +1,5 @@
-#include "UnitTest.hpp"
-struct UnitTest_t UnitTest;
+#include "UnitTestMain.hpp"
+
 int main()
 {
 	TESTS_RUN;

@@ -10,7 +10,7 @@ namespace{
 	ItemData shield{"Shield", "", ItemType::Armor, ItemSkill::Shield,ItemEquipSlot::Hand, 2, 5};
 }
 
-TEST(CharacterHp){
+TEST(Character, Hp){
 	Character c;
 	TEST_EQ(c.Hp(), c.MaxHp());
 	c.TakeDamage(10);
@@ -27,7 +27,7 @@ TEST(CharacterHp){
 	TEST_EQ(c.Hp(), c.MaxHp());
 }
 
-TEST(CharacterMana){
+TEST(Character, Mana){
 	Character c;
 	TEST_EQ(c.Mana(), c.MaxMana());
 	c.UseMana(10);
@@ -44,7 +44,7 @@ TEST(CharacterMana){
 	TEST_EQ(c.Mana(), c.MaxMana());
 }
 
-TEST(CharacterHeat){
+TEST(Character, Heat){
 	Character c;
 	TEST_EQ(c.Heat(), 0);
 
@@ -61,7 +61,7 @@ TEST(CharacterHeat){
 	TEST_EQ(c.Heat(), 0);
 }
 
-TEST(CharacterItems){
+TEST(Character, Items){
 	Character c;
 	ItemDataStore ids;
 	auto& inventory = c.Items();
@@ -80,7 +80,7 @@ TEST(CharacterItems){
 	TEST_EQ(inventory[0].Data().Name, "Box");
 }
 
-TEST(CharacterEquip){
+TEST(Character, Equip){
 	Character c;
 	ItemDataStore ids;
 	ItemDataStore::AddItem(sword);
@@ -96,7 +96,7 @@ TEST(CharacterEquip){
 	TEST_EQ(c.Bonus(BonusType::Attack), 5);
 }
 
-TEST(CharacterMultiEquip){
+TEST(Character, MultiEquip){
 	Character c;
 	ItemDataStore ids;
 	ItemDataStore::AddItem(sword);
@@ -119,7 +119,7 @@ TEST(CharacterMultiEquip){
 	TEST_EQ(c.Bonus(BonusType::Defense), 2);
 }
 
-TEST(CharacterEquippedSkills){
+TEST(Character, EquippedSkills){
 	Character c;
 	ItemDataStore ids;
 	ItemDataStore::AddItem(sword);
@@ -140,7 +140,7 @@ TEST(CharacterEquippedSkills){
 	TEST_EQ(abilities[3]->Name(), "SwordShield-Skill");
 }
 
-TEST(CharacterSwappingEquippedSkills){
+TEST(Character, SwappingEquippedSkills){
 	Character c;
 	ItemDataStore ids;
 	ItemDataStore::AddItem(sword);

@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <map>
 
 struct UnitTest_t{
 	 int Failed = 0;
@@ -12,10 +13,11 @@ struct UnitTest_t{
 	 int CurrentFailed;
 	 int CurrentTotal;
 	 std::string CurrentTest;
-	 std::vector<std::function<void()>> Tests;
-	 void AddTest(std::function<void()> test){
-		Tests.push_back(test);
-	}
+	 using Test = std::pair<std::string, std::function<void()>>;
+	 std::map<std::string, std::vector<Test>> TestGroups;
+	 void AddTest(std::string group, Test test){
+		TestGroups[group].push_back(test);
+	 }
 };
 extern UnitTest_t UnitTest;
 
@@ -44,27 +46,21 @@ extern UnitTest_t UnitTest;
 		TEST_END;\
 		return;}
 
-#define TEST_CLASS(CLASS)\
-	CLASS##_Test();
-
-#define TEST_LOAD(TEST)\
-	UnitTest.AddTest(Test_##TEST);
-
-#define TEST(TEST)\
+#define TEST(GROUP, TEST)\
 	void Test_##TEST();\
 	struct Test_Struct_##TEST{\
 		Test_Struct_##TEST(){\
-			UnitTest.AddTest(Test_##TEST);\
+			UnitTest.AddTest(#GROUP, std::make_pair(#TEST, Test_##TEST));\
 		}\
 	};\
 	Test_Struct_##TEST TEST##_t;\
 	void Test_##TEST()
 
 #define TEST_BEGIN(TEST)\
-	UnitTest.CurrentTest   = #TEST;\
+	UnitTest.CurrentTest   = TEST;\
 	UnitTest.CurrentFailed = 0;\
 	UnitTest.CurrentTotal  = 0;\
-	std::cout << "----- Beginning tests for " << #TEST << " -----\n"
+	std::cout << "----- Beginning tests for " << TEST << " -----\n"
 
 #define TEST_END\
 	std::cout << "----- Results for         " << UnitTest.CurrentTest <<" -----\n"\
@@ -73,8 +69,12 @@ extern UnitTest_t UnitTest;
 			  << "\tFailed: " << UnitTest.CurrentFailed << std::endl << std::endl;
 
 #define TESTS_RUN\
-	for( auto const& t : UnitTest.Tests ){\
-		t();\
+	for( auto const& group : UnitTest.TestGroups ){\
+		for( auto const& test : group.second ){\
+			TEST_BEGIN(group.first + "-" + std::get<0>(test));\
+			std::get<1>(test)();\
+			TEST_END;\
+		}\
 	}
 
 #define TEST_RESULTS_OVERALL \
