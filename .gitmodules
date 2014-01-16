@@ -1,0 +1,3 @@
+[submodule "include/PimplMacro"]
+	path = include/PimplMacro
+	url = https://github.com/TrapAlice/PimplMacro.git
