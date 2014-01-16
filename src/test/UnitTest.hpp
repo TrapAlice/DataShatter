@@ -6,18 +6,21 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <memory>
 
+using Test = std::pair<std::string, std::function<void()>>;
 struct UnitTest_t{
-	 int Failed = 0;
-	 int Total = 0;
-	 int CurrentFailed;
-	 int CurrentTotal;
-	 std::string CurrentTest;
-	 using Test = std::pair<std::string, std::function<void()>>;
-	 std::map<std::string, std::vector<Test>> TestGroups;
-	 void AddTest(std::string group, Test test){
-		TestGroups[group].push_back(test);
-	 }
+	int Failed = 0;
+	int Total = 0;
+	int CurrentFailed;
+	int CurrentTotal;
+	std::string CurrentTest;
+	static std::unique_ptr<std::map<std::string, std::vector<Test>>> TestGroups;
+	void AddTest(std::string const& group, Test test){
+		if( !TestGroups ) TestGroups.reset(new std::map<std::string, std::vector<Test>>());
+		TestGroups->insert(std::make_pair(group, std::vector<Test>{}));
+		TestGroups->at(group).push_back(test);
+	}
 };
 extern UnitTest_t UnitTest;
 
@@ -60,16 +63,15 @@ extern UnitTest_t UnitTest;
 	UnitTest.CurrentTest   = TEST;\
 	UnitTest.CurrentFailed = 0;\
 	UnitTest.CurrentTotal  = 0;\
-	std::cout << "----- Beginning tests for " << TEST << " -----\n"
 
 #define TEST_END\
-	std::cout << "----- Results for         " << UnitTest.CurrentTest <<" -----\n"\
-	          << "\tTested: " << UnitTest.CurrentTotal << std::endl\
-			  << "\tPassed: " << UnitTest.CurrentTotal - UnitTest.CurrentFailed << std::endl\
-			  << "\tFailed: " << UnitTest.CurrentFailed << std::endl << std::endl;
+	std::cout << "\r" << UnitTest.CurrentTest << " (" \
+	          << UnitTest.CurrentTotal << "/" \
+			  << UnitTest.CurrentTotal - UnitTest.CurrentFailed << "/" \
+			  << UnitTest.CurrentFailed << ")" << std::endl;
 
 #define TESTS_RUN\
-	for( auto const& group : UnitTest.TestGroups ){\
+	for( auto const& group : *UnitTest.TestGroups.get() ){\
 		for( auto const& test : group.second ){\
 			TEST_BEGIN(group.first + "-" + std::get<0>(test));\
 			std::get<1>(test)();\
@@ -78,9 +80,12 @@ extern UnitTest_t UnitTest;
 	}
 
 #define TEST_RESULTS_OVERALL \
-	std::cout << "Total Tested: " << UnitTest.Total << std::endl\
-	          << "Total Passed: " << UnitTest.Total - UnitTest.Failed << std::endl\
-			  << "Total Failed: " << UnitTest.Failed << std::endl << std::endl;
+	std::cout << "Total (" \
+	          << UnitTest.Total << "/" \
+			  << UnitTest.Total - UnitTest.Failed << "/" \
+			  << UnitTest.Failed << ") " \
+			  << ((!!UnitTest.Failed)? "FAILED" : "PASSED") << std::endl;\
+    return (!!UnitTest.Failed);
 
 #endif
 
