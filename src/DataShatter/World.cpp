@@ -1,9 +1,9 @@
 #include "World.hpp"
 #include "Character.hpp"
 
-PRIVATE_VARIABLES(World,
+PRIVATE_VARIABLES(World){
 	unique_ptr<Character> character;
-);
+};
 
 World::World()
 	: INIT_PRIVATE_VARIABLES()

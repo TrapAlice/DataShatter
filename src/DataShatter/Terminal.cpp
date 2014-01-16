@@ -1,11 +1,11 @@
 #include "Terminal.hpp"
 #include "libtcod.hpp"
 
-PRIVATE_VARIABLES(Terminal,
+PRIVATE_VARIABLES(Terminal){
 	unique_ptr<TCODConsole> console;
 	int                line = 0;
 	int                x = 0;
-);
+};
 
 Terminal::Terminal(string const& title)
 	: INIT_PRIVATE_VARIABLES()

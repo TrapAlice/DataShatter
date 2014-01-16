@@ -2,6 +2,7 @@
 #define GAMESTATE_BATTLE_HPP
 
 #include "GameState.hpp"
+#include "PimplMacro/PimplMacro.hpp"
 
 class State_Battle : public iGameState{
 public:

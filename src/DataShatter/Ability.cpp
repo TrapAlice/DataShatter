@@ -1,11 +1,11 @@
 #include "Ability.hpp"
 
-PRIVATE_VARIABLES(Ability,
+PRIVATE_VARIABLES(Ability){
 	PrivateVariables(string const& name)
 		: Name(name)
 	{}
 	string          Name;
-);
+};
 
 Ability::Ability(string const& name)
 	: INIT_PRIVATE_VARIABLES(name)

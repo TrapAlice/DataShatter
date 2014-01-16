@@ -2,6 +2,7 @@
 #define EQUIPMENT_HPP
 
 #include "common.hpp"
+#include "PimplMacro/PimplMacro.hpp"
 
 class Item;
 class Ability;

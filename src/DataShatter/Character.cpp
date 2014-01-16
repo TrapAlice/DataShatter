@@ -4,7 +4,7 @@
 #include "Equipment.hpp"
 #include "Ability.hpp"
 
-PRIVATE_VARIABLES(Character, 
+PRIVATE_VARIABLES(Character){
 	int             hp = 50;
 	int             maxHp = 50;
 	double          mana = 25;
@@ -13,11 +13,10 @@ PRIVATE_VARIABLES(Character,
 	vector<Item>    items;
 	Equipment       equipment;
 	std::array<Ability const*, 8> abilities;
-);
+};
 
-PRIVATE_FUNCTIONS(Character,
-	PRIVATE_FUNCTION_DECLARE(void, ChangeWeaponAbilities, ItemSkill const skill, int location)
-	PRIVATE_FUNCTION_DEFINE(
+PRIVATE_FUNCTIONS(Character){
+	PRIVATE_FUNCTION_DECLARE(void, ChangeWeaponAbilities, ItemSkill const skill, int location){
 		int offset = 3 + static_cast<int>(ItemSkill::NA);
 		if( location == RIGHT_HAND ){
 			This->m->abilities[0] = &AbilityStore::GetAbility(static_cast<int>(skill)*offset);
@@ -36,8 +35,8 @@ PRIVATE_FUNCTIONS(Character,
 
 		This->m->abilities[3] =
 		    &AbilityStore::GetAbility((right_id * offset) + 3 + left_id);
-	);
-);
+	};
+};
 
 Character::Character()
 	: INIT_PRIVATE_VARIABLES()

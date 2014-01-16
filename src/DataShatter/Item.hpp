@@ -2,6 +2,7 @@
 #define ITEM_HPP
 
 #include "common.hpp"
+#include "PimplMacro/PimplMacro.hpp"
 
 struct ItemData;
 

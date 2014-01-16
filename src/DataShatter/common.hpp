@@ -28,23 +28,4 @@ typedef std::chrono::time_point<std::chrono::system_clock> Time;
 
 #define DEBUG(...) std::cerr << __FILE__ << ":" << __LINE__ << " - " << __VA_ARGS__ << std::endl;
 
-#define HAS_PRIVATE_VARIABLES struct PrivateVariables; unique_ptr<PrivateVariables> m;
-#define PRIVATE_VARIABLES(CLASS, ...)\
-	struct CLASS::PrivateVariables{\
-		__VA_ARGS__\
-	};
-#define INIT_PRIVATE_VARIABLES(...) m(new PrivateVariables(__VA_ARGS__))
-
-#define HAS_PRIVATE_FUNCTIONS class PrivateFunctions; friend PrivateFunctions;
-#define PRIVATE_FUNCTIONS(CLASS, ...)\
-	using PrivateClassType = CLASS;\
-	class CLASS::PrivateFunctions{\
-	public:\
-		__VA_ARGS__\
-	};
-#define PRIVATE_FUNCTION_DECLARE(RETURN, NAME, ...)\
-	static RETURN NAME(PrivateClassType* This, ##__VA_ARGS__)
-#define PRIVATE_FUNCTION_DEFINE(...) { __VA_ARGS__ }
-#define PRIVATE(FUNCTION, ...) PrivateFunctions::FUNCTION(this, ##__VA_ARGS__);
-
 #endif

@@ -2,6 +2,7 @@
 #define WORLD_HPP
 
 #include "common.hpp"
+#include "PimplMacro/PimplMacro.hpp"
 
 class Character;
 

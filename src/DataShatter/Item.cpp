@@ -1,14 +1,14 @@
 #include "Item.hpp"
 #include "ItemData.hpp"
 
-PRIVATE_VARIABLES(Item,
+PRIVATE_VARIABLES(Item){
 	PrivateVariables(ItemData const& data)
 		: data(data)
 	{}
 	ItemData const& data;
 	int             durability;
 	int             maxDurability;
-);
+};
 
 Item::Item(ItemData const& data)
 	: INIT_PRIVATE_VARIABLES(data)

@@ -4,11 +4,11 @@
 #include "Terminal.hpp"
 #include "World.hpp"
 
-PRIVATE_VARIABLES(Game,
+PRIVATE_VARIABLES(Game){
 	unique_ptr<Terminal> terminal;
 	unique_ptr<World> world;
 	stack<unique_ptr<iGameState>> stateStack;
-);
+};
 
 Game::Game()
 	: INIT_PRIVATE_VARIABLES()

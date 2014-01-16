@@ -2,6 +2,7 @@
 #define TERMINAL_HPP
 
 #include "common.hpp"
+#include "PimplMacro/PimplMacro.hpp"
 
 #define Printxy(x, y, ...)  print(x, y) << __VA_ARGS__;
 #define Printx(x, ...)      print(x) << __VA_ARGS__;

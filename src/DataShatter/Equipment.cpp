@@ -5,7 +5,7 @@
 
 #include <array>
 
-struct Equipment::PrivateVariables{
+PRIVATE_VARIABLES(Equipment){
 	std::array<Item const*, EQUIPMENT_SLOTS> equipment;
 };
 
