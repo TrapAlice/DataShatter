@@ -28,3 +28,13 @@ TEST(Battle, CharacterUseSkill){
 	TEST_CHECK(e.Hp() < e.MaxHp());
 }
 
+TEST(Battle, EnemyAttackCharacter){
+    Character c;
+    Enemy e;
+
+    e.Attack(c);
+
+    TEST_CHECK(c.Hp() < c.MaxHp());
+    TEST_CHECK(e.Mana() < e.MaxMana());
+}
+
