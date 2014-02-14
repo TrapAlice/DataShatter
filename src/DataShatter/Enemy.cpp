@@ -9,3 +9,9 @@ Enemy::Enemy()
 
 Enemy::~Enemy(){}
 
+void Enemy::Attack(Combatant& target)
+{
+    target.TakeDamage(5);
+    UseMana(20);
+}
+

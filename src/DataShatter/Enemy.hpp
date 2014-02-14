@@ -9,6 +9,7 @@ class Enemy : public Combatant{
 public:
 	Enemy();
 	~Enemy();
+    void            Attack(Combatant&);
 
 private:
 	HAS_PRIVATE_VARIABLES;
