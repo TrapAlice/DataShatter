@@ -3,12 +3,9 @@
 #include "ItemData.hpp"
 #include "Equipment.hpp"
 #include "Ability.hpp"
+#include "Enemy.hpp"
 
 PRIVATE_VARIABLES(Character){
-	int             hp = 50;
-	int             maxHp = 50;
-	double          mana = 25;
-	double          maxMana = 25;
 	double          heat = 0;
 	vector<Item>    items;
 	Equipment       equipment;
@@ -43,26 +40,6 @@ Character::Character()
 {}
 Character::~Character(){}
 
-void Character::TakeDamage(int amount)
-{
-	m->hp -= (m->hp - amount > 0)? amount : m->hp;
-}
-
-void Character::RecoverHealth(int amount)
-{
-	m->hp = (m->hp + amount > m->maxHp)? m->maxHp : m->hp + amount;
-}
-
-void Character::UseMana(double amount)
-{
-	m->mana -= (m->mana - amount > 0)? amount : m->mana;
-}
-
-void Character::GainMana(double amount)
-{
-	m->mana = (m->mana + amount > m->maxMana)? m->maxMana : m->mana + amount;
-}
-
 void Character::LoseHeat(double amount)
 {
 	m->heat -= (m->heat - amount > 0)? amount : m->heat;
@@ -71,6 +48,14 @@ void Character::LoseHeat(double amount)
 void Character::GenerateHeat(double amount)
 {
 	m->heat = (m->heat + amount > 100)? 100 : m->heat + amount;
+}
+
+void Character::UseSkill(int skill, Enemy& target)
+{
+    Ability const& ability = *m->abilities[skill];
+    UseMana(ability.ManaCost());
+    GenerateHeat(ability.Heat());
+    target.TakeDamage(10);
 }
 
 void Character::GiveItem(Item item)
@@ -94,10 +79,6 @@ void Character::Equip(Item const& item, int location)
 	}
 }
 
-int Character::Hp() const { return m->hp; }
-int Character::MaxHp() const { return m->maxHp; }
-int Character::Mana() const { return m->mana; }
-int Character::MaxMana() const { return m->maxMana; }
 int Character::Heat() const { return m->heat; }
 const vector<Item>& Character::Items() const { return m->items; }
 Equipment& Character::GetEquipment() const { return m->equipment; }

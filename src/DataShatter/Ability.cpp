@@ -1,18 +1,20 @@
 #include "Ability.hpp"
 
 PRIVATE_VARIABLES(Ability){
-	PrivateVariables(string const& name)
+	PrivateVariables(string const& name, int manaCost)
 		: Name(name)
+        , ManaCost(manaCost)
 	{}
 	string          Name;
+	int             ManaCost;
 };
 
 Ability::Ability(string const& name)
-	: INIT_PRIVATE_VARIABLES(name)
+	: INIT_PRIVATE_VARIABLES(name, 3)
 {}
 
 Ability::Ability(Ability&& s) noexcept
-	: INIT_PRIVATE_VARIABLES(s.m->Name)
+	: INIT_PRIVATE_VARIABLES(s.m->Name, s.m->ManaCost)
 {
 
 }
@@ -21,6 +23,8 @@ Ability::~Ability() noexcept
 {}
 
 string const& Ability::Name() const { return m->Name; }
+int Ability::ManaCost() const { return m->ManaCost; }
+int Ability::Heat() const { return 1; }
 
 void AbilityStore::LoadAbilities()
 {

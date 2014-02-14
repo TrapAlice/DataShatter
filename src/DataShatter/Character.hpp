@@ -3,32 +3,27 @@
 
 #include "common.hpp"
 #include "PimplMacro/PimplMacro.hpp"
+#include "Combatant.hpp"
 
 class Item;
 class Equipment;
 class Ability;
+class Enemy;
 
 enum class BonusType;
 enum class ItemSkill;
 
-class Character{
+class Character : public Combatant{
 public:
 	Character();
 	~Character();
 
-	void            TakeDamage(int amount);
-	void            RecoverHealth(int amount);
-	void            UseMana(double amount);
-	void            GainMana(double amount);
 	void            LoseHeat(double amount);
 	void            GenerateHeat(double amount);
+	void            UseSkill(int skill, Enemy& target);
 	void            GiveItem(Item);
 	void            Equip(Item const&);
 	void            Equip(Item const&, int EquippedLocation);
-	int             Hp() const;
-	int             MaxHp() const;
-	int             Mana() const;
-	int             MaxMana() const;
 	int             Heat() const;
 	vector<Item> const& Items() const;
 	Equipment&      GetEquipment() const;
@@ -37,7 +32,6 @@ public:
 private:
 	HAS_PRIVATE_VARIABLES;
 	HAS_PRIVATE_FUNCTIONS;
-	//void            ChangeWeaponAbilities(ItemSkill const, int EquippedLocation);
 };
 
 #endif

@@ -11,6 +11,8 @@ public:
 	Ability(Ability&&) noexcept;
 	~Ability() noexcept;
 	string const&   Name() const;
+    int             ManaCost() const;
+    int             Heat() const;
 private:
 	HAS_PRIVATE_VARIABLES;
 };
