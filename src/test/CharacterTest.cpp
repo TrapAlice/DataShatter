@@ -74,7 +74,7 @@ TEST(Character, Items){
 
 	auto itemName = inventory[0].Data().Name;
 	TEST_EQ(itemName, "Box");
-	
+
 	for( int x = 0; x < 5; ++x ) c.GiveItem({ItemDataStore::GetData(0)});
 	TEST_EQ(inventory.size(), 6);
 	TEST_EQ(inventory[0].Data().Name, "Box");
@@ -109,7 +109,7 @@ TEST(Character, MultiEquip){
 	auto& equipment = c.GetEquipment();
 	auto weapon = equipment.Equipped(RIGHT_HAND);
 	auto shield = equipment.Equipped(LEFT_HAND);
-	
+
 	TEST_REQUIRE(weapon);
 	TEST_REQUIRE(shield);
 	TEST_EQ(weapon->Data().Name, "Sword");
@@ -128,7 +128,7 @@ TEST(Character, EquippedSkills){
 	c.GiveItem({ItemDataStore::GetData(1)});
 	c.Equip(c.Items()[0]);
 	c.Equip(c.Items()[1], LEFT_HAND);
-	
+
 	auto abilities = c.GetAbilities();
 	TEST_REQUIRE(abilities[0]);
 	TEST_REQUIRE(abilities[1]);
