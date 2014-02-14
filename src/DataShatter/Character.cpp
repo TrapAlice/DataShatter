@@ -52,7 +52,7 @@ void Character::GenerateHeat(double amount)
 
 void Character::UseSkill(int skill, Enemy& target)
 {
-    Ability const& ability = *m->abilities[skill];
+    Ability const& ability = *m->abilities[skill-1];
     UseMana(ability.ManaCost());
     GenerateHeat(ability.Heat());
     target.TakeDamage(ability.Damage());
