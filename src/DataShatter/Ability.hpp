@@ -7,12 +7,13 @@
 
 class Ability{
 public:
-	Ability(string const& name);
+	Ability(string const& name, int manaCost, int damage);
 	Ability(Ability&&) noexcept;
 	~Ability() noexcept;
 	string const&   Name() const;
     int             ManaCost() const;
     int             Heat() const;
+    int             Damage() const;
 private:
 	HAS_PRIVATE_VARIABLES;
 };
