@@ -37,12 +37,12 @@ extern UnitTest_t UnitTest;
 		UnitTest.Failed++; UnitTest.CurrentFailed++; }
 
 #define TEST_CHECK(A) UnitTest.Total++; UnitTest.CurrentTotal++;\
-	if(!A){     std::cerr << "TEST_CHECK FAILED: " << __FILE__ << ":" << __LINE__\
+	if(!(A)){     std::cerr << "TEST_CHECK FAILED: " << __FILE__ << ":" << __LINE__\
 		                  << " -- !" << #A << std::endl;\
 		UnitTest.Failed++; UnitTest.CurrentFailed++; }
 
 #define TEST_REQUIRE(A) UnitTest.Total++; UnitTest.CurrentTotal++;\
-	if(!A){     std::cerr << "TEST_REQUIRE FAILED: " << __FILE__ << ":" << __LINE__\
+	if(!(A)){     std::cerr << "TEST_REQUIRE FAILED: " << __FILE__ << ":" << __LINE__\
 		                  << " -- !" << #A << std::endl\
 						  << "Exiting Test " << UnitTest.CurrentTest << " early\n";\
 		UnitTest.Failed++; UnitTest.CurrentFailed++;\
