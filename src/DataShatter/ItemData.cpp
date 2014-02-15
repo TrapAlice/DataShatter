@@ -20,6 +20,7 @@ void ItemDataStore::LoadData()
 #define ITEM(NAME, INFO, TYPE, SKILL, LOCATION,  POWER, DURABILITY)\
 	AddItem(ItemData(NAME, INFO, TYPE, SKILL, LOCATION, POWER, DURABILITY));
 	ITEM("Sword", "It's sharp", ItemType::Weapon, ItemSkill::Sword, ItemEquipSlot::Hand, 5, 10);
+	ITEM("Shield", "It can block things", ItemType::Weapon, ItemSkill::Shield, ItemEquipSlot::Hand, 2, 5);
 #undef ITEM
 }
 
@@ -30,6 +31,7 @@ void ItemDataStore::AddItem(ItemData const& data)
 
 ItemData const& ItemDataStore::GetData(int id)
 {
+	if( mItemData.empty() ) LoadData();
 	return mItemData.at(id);
 }
 
