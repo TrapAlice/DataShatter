@@ -9,6 +9,13 @@
 #define Printy(y, ...)      print(-1, y_) << __VA_ARGS__;
 #define Print(...)          print() << __VA_ARGS__;
 
+enum class Colour{
+	White,
+	Green,
+	Orange,
+	Red,
+	Gray
+};
 
 class Terminal{
 public:
@@ -34,6 +41,7 @@ public:
 	RenderText      print(int x = -1, int y = -1);
 	void            p(int x, int y, std::ostringstream& text);
 	char            Key();
+	void            SetColour(Colour);
 private:
 	HAS_PRIVATE_VARIABLES;
 	friend RenderText;

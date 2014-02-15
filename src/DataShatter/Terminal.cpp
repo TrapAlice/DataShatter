@@ -48,7 +48,28 @@ void Terminal::p(int x, int y, std::ostringstream& text)
 {
 	if( x >= 0) m->x = x;
 	if( y >= 0) m->line = y;
-	m->console->print(m->x, m->line, text.str().c_str());
+	m->console->print(m->x, m->line, "%c%s%c", TCOD_COLCTRL_1, text.str().c_str(), TCOD_COLCTRL_STOP);
 	m->line++;
+}
+
+void Terminal::SetColour(Colour colour)
+{
+	switch( colour ){
+	case Colour::White:
+		TCODConsole::setColorControl(TCOD_COLCTRL_1,TCODColor::white,TCODColor::black);
+		break;
+	case Colour::Green:
+		TCODConsole::setColorControl(TCOD_COLCTRL_1,TCODColor::green,TCODColor::black);
+		break;
+	case Colour::Orange:
+		TCODConsole::setColorControl(TCOD_COLCTRL_1,TCODColor::orange,TCODColor::black);
+		break;
+	case Colour::Red:
+		TCODConsole::setColorControl(TCOD_COLCTRL_1,TCODColor::red,TCODColor::black);
+		break;
+	case Colour::Gray:
+		TCODConsole::setColorControl(TCOD_COLCTRL_1,TCODColor::grey,TCODColor::black);
+		break;
+	}
 }
 
