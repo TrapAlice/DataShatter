@@ -25,13 +25,21 @@ void State_Battle::Render()
 	t.Printx(0, "Mana: " << c.Mana() << "/" << c.MaxMana());
 	t.Printx(0, "Heat: " << c.Heat() << "/" << 100);
 	t.Print("");
+	switch( m->enemy.State() ){
+		case CombatantState::Idle: t.SetColour(Colour::Green); break;
+		case CombatantState::Preparing: t.SetColour(Colour::Orange); break;
+		case CombatantState::Attacking: t.SetColour(Colour::Red); break;
+	}
 	t.Printx(0, "EnemyHp: " << m->enemy.Hp());
+	t.SetColour(Colour::White);
 	t.Print("");
 
 	auto abilities = c.GetAbilities();
+	if( c.isCooldown() ) t.SetColour(Colour::Gray);
 	for( int x = 0; x < 4; ++x ){
 		t.Printx(0, "[" << x << "] - " << abilities[x]->Name());
 	}
+	t.SetColour(Colour::White);
 }
 
 void State_Battle::Update()
