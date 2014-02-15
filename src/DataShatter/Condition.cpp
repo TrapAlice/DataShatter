@@ -1,6 +1,7 @@
 #include "Condition.hpp"
 #include "Combatant.hpp"
 #include "GlobalTime.hpp"
+#include <memory>
 
 PRIVATE_VARIABLES(Condition){
     PrivateVariables(ConditionType type,
@@ -21,6 +22,10 @@ Condition::Condition(ConditionType type,
                      active_function activate,
 		     unsigned duration)
     : INIT_PRIVATE_VARIABLES(type, activate, duration)
+{}
+
+Condition::Condition(Condition& c)
+	: INIT_PRIVATE_VARIABLES(c.m->type, c.m->activate, c.m->duration)
 {}
 
 Condition::Condition(Condition&& c) noexcept

@@ -1,7 +1,6 @@
 #include "Combatant.hpp"
 #include "common.hpp"
 #include "Condition.hpp"
-#include <list>
 
 PRIVATE_VARIABLES(Combatant){
     int             hp = 50;
@@ -9,7 +8,7 @@ PRIVATE_VARIABLES(Combatant){
     double          mana = 25;
     double          maxMana = 25;
     CombatantState  state = CombatantState::Idle;
-	std::list<Condition*> conditions;
+	std::list<Condition> conditions;
 };
 
 Combatant::Combatant()
@@ -20,9 +19,9 @@ Combatant::~Combatant(){}
 
 void Combatant::TakeDamage(int amount)
 {
-	for( auto condition :  m->conditions ){
-		if( condition->Type() == ConditionType::On_defense){
-			condition->Activate(*this, *this, amount);
+	for( auto& condition :  m->conditions ){
+		if( condition.Type() == ConditionType::On_defense){
+			condition.Activate(*this, *this, amount);
 		}
 	}
     m->hp -= (m->hp - amount > 0)? amount : m->hp;
@@ -50,8 +49,10 @@ void Combatant::SetState(CombatantState newState)
 
 void Combatant::GainCondition(Condition& newCondition)
 {
-	m->conditions.push_back(&newCondition);
+	m->conditions.emplace_back(newCondition);
 }
+
+std::list<Condition>& Combatant::Conditions() const { return m->conditions; }
 
 int Combatant::Hp() const { return m->hp; }
 int Combatant::MaxHp() const { return m->maxHp; }

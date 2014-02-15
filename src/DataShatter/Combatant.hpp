@@ -2,6 +2,8 @@
 #define COMBATANT_HPP
 
 #include "PimplMacro/PimplMacro.hpp"
+#include "common.hpp"
+#include <list>
 
 enum class CombatantState{
      Idle
@@ -24,6 +26,8 @@ public:
     void            SetState(CombatantState);
 	void            GainCondition(Condition&);
     //virtual void    UseSkill(Combatant& target);
+    virtual void    Update(Combatant&) = 0;
+    std::list<Condition>& Conditions() const;
     int             Hp() const;
     int             MaxHp() const;
     int             Mana() const;

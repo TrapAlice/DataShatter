@@ -47,6 +47,8 @@ void State_Battle::Update()
 			break;
 	}
 	c.GainMana(0.2);
+	m->enemy.Update(c);
+	c.Update(m->enemy);
 	if( m->enemy.Hp() <= 0 ){
 		c.BattleEnd();
 		s.pop();

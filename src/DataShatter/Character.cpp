@@ -5,6 +5,7 @@
 #include "Ability.hpp"
 #include "Enemy.hpp"
 #include "GlobalTime.hpp"
+#include "Condition.hpp"
 
 PRIVATE_VARIABLES(Character){
 	double          heat = 0;
@@ -62,6 +63,11 @@ void Character::UseSkill(int skill, Enemy& target)
     GenerateHeat(ability.Heat());
     target.TakeDamage(ability.Damage());
     m->cooldown = GlobalTime::Current() + ability.Cooldown();
+}
+
+void Character::Update(Combatant& target)
+{
+	Conditions().remove_if([](Condition& c){ return c.isExpired(); });
 }
 
 void Character::BattleEnd()

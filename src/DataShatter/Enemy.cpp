@@ -2,7 +2,7 @@
 #include "GlobalTime.hpp"
 
 PRIVATE_VARIABLES(Enemy){
-	unsigned        damageTime;
+	unsigned        damageTime = -1;
 };
 
 Enemy::Enemy()
@@ -14,13 +14,21 @@ Enemy::~Enemy(){}
 void Enemy::Attack(Combatant& target)
 {
     SetState(CombatantState::Attacking);
-    m->damageTime = GlobalTime::Current() + 1;
-    UseMana(20);
+    m->damageTime = GlobalTime::Current() + 1000;
+    DEBUG(GlobalTime::Current() << " < " << m->damageTime);
 }
 
 void Enemy::Update(Combatant& target)
 {
-	if( GlobalTime::Current() < m->damageTime ) return;
-	target.TakeDamage(5);
+	if( Mana() >= 25 && State() == CombatantState::Idle ){
+		Attack(target);
+		UseMana(25);
+	}
+	GainMana(0.1);
+	if( GlobalTime::Current() > m->damageTime && State() == CombatantState::Attacking ){
+		DEBUG("Enemy attacks!");
+		target.TakeDamage(5);
+		SetState(CombatantState::Idle);
+	}
 }
 
