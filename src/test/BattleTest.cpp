@@ -38,3 +38,22 @@ TEST(Battle, EnemyAttackCharacter){
     TEST_CHECK(e.Mana() < e.MaxMana());
 }
 
+TEST(Battle, CharacterBlocksEnemy){
+    Character c;
+    Enemy e;
+    ItemDataStore ids;
+    ItemDataStore::AddItem(sword);
+    ItemDataStore::AddItem(shield);
+    c.GiveItem({ItemDataStore::GetData(0)});
+    c.GiveItem({ItemDataStore::GetData(1)});
+    c.Equip(c.Items()[0]);
+    c.Equip(c.Items()[1], LEFT_HAND);
+
+    c.UseSkill(3, e);
+    c.SetState(CombatantState::Guarding);
+    e.Attack(c);
+
+    TEST_EQ(c.Hp(), c.MaxHp());
+    TEST_EQ(e.Hp(), e.MaxHp());
+    TEST_CHECK(c.Mana() < c.MaxMana());
+}
