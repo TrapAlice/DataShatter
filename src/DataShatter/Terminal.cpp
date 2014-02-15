@@ -13,7 +13,7 @@ Terminal::Terminal(string const& title)
 	m->console = std::unique_ptr<TCODConsole>(new TCODConsole(80, 25));
 	TCODConsole::setCustomFont("terminal.png", TCOD_FONT_LAYOUT_ASCII_INROW, 0, 0);
 	TCODConsole::initRoot(80, 25, title.c_str(), false);
-	TCODSystem::setFps(60);
+	TCODSystem::setFps(30);
 }
 
 Terminal::~Terminal(){}
