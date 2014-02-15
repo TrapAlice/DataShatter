@@ -4,6 +4,7 @@
 #include "DataShatter/Item.hpp"
 #include "DataShatter/ItemData.hpp"
 #include "DataShatter/Equipment.hpp"
+#include "DataShatter/GlobalTime.hpp"
 
 namespace{
 	ItemData sword{"Sword", "", ItemType::Weapon, ItemSkill::Sword, ItemEquipSlot::Hand, 5, 5};
@@ -29,10 +30,13 @@ TEST(Battle, CharacterUseSkill){
 }
 
 TEST(Battle, EnemyAttackCharacter){
+	GlobalTime::SetDebugging();
     Character c;
     Enemy e;
 
     e.Attack(c);
+    GlobalTime::SetTime(5);
+    e.Update(c);
 
     TEST_CHECK(c.Hp() < c.MaxHp());
     TEST_CHECK(e.Mana() < e.MaxMana());
