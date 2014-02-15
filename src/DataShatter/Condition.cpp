@@ -3,16 +3,17 @@
 
 PRIVATE_VARIABLES(Condition){
     PrivateVariables(ConditionType type,
-                     std::function<void(Combatant&, Combatant&, int&)> activate)
+                     active_function activate)
         : type(type)
         , activate(activate)
     {}
     ConditionType   type;
-    std::function<void(Combatant&, Combatant&, int&)> activate;
+    int             expire_time;
+    active_function activate;
 };
 
 Condition::Condition(ConditionType type,
-                     std::function<void(Combatant&, Combatant&, int&)> activate)
+                     active_function activate)
     : INIT_PRIVATE_VARIABLES(type, activate)
 {}
 
@@ -29,4 +30,5 @@ void Condition::Activate(Combatant& attacker, Combatant& defender, int& value)
 }
 
 ConditionType Condition::Type() const { return m->type; }
+bool Condition::isExpired() const { return false; }
 
