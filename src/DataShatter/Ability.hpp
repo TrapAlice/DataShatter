@@ -17,6 +17,7 @@ public:
     int             Heat() const;
     int             Damage() const;
 	void            Activate(Combatant&, Combatant&) const;
+	unsigned        Cooldown() const;
 private:
 	HAS_PRIVATE_VARIABLES;
 };

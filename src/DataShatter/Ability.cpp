@@ -5,31 +5,38 @@
 
 Condition Defending{ConditionType::On_defense,[](Combatant&,Combatant&, int& damage){
 	damage = 0;
-}, 1};
+}, 250};
 
 PRIVATE_VARIABLES(Ability){
-	PrivateVariables(string const& name, int manaCost, int damage)
+	PrivateVariables(string const& name, double manaCost, int damage, unsigned time)
 		: Name(name)
         , ManaCost(manaCost)
         , Damage(damage)
+	, cooldown(time)
 	{}
 	string          Name;
-	int             ManaCost;
+	double          ManaCost;
     int             Damage;
+	union{
+		unsigned cooldown;
+		unsigned delay;
+	};
 	std::function<void(Combatant&, Combatant&)> activate;
 };
 
 Ability::Ability(string const& name, int manaCost, int damage)
-	: INIT_PRIVATE_VARIABLES(name, 3, damage)
+	: INIT_PRIVATE_VARIABLES(name, 3, damage, 1000)
 {
 	if(name == "Shield-Skill03"){
 		m->activate = [](Combatant& attacker, Combatant& defender)
 		                { attacker.GainCondition(Defending); };
+		m->cooldown = 250;
+		m->ManaCost = 0.5;
 	}
 }
 
 Ability::Ability(Ability&& s) noexcept
-	: INIT_PRIVATE_VARIABLES(s.m->Name, s.m->ManaCost, s.m->Damage)
+	: INIT_PRIVATE_VARIABLES(s.m->Name, s.m->ManaCost, s.m->Damage, m->cooldown)
 {
 
 }
@@ -48,6 +55,7 @@ string const& Ability::Name() const { return m->Name; }
 int Ability::ManaCost() const { return m->ManaCost; }
 int Ability::Heat() const { return 1; }
 int Ability::Damage() const { return m->Damage; }
+unsigned Ability::Cooldown() const { return m->cooldown; }
 
 void AbilityStore::LoadAbilities()
 {
