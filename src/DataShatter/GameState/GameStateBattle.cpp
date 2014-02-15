@@ -1,11 +1,13 @@
 #include "GameStateBattle.hpp"
 
+#include "../Ability.hpp"
 #include "../Character.hpp"
+#include "../Enemy.hpp"
 #include "../Terminal.hpp"
 #include "../World.hpp"
 
 PRIVATE_VARIABLES(State_Battle){
-	int             enemyHp = 100;
+	Enemy           enemy;
 };
 
 State_Battle::State_Battle(Terminal& t, GameStateStack& s, World& w)
@@ -23,29 +25,29 @@ void State_Battle::Render()
 	t.Printx(0, "Mana: " << c.Mana() << "/" << c.MaxMana());
 	t.Printx(0, "Heat: " << c.Heat() << "/" << 100);
 	t.Print("");
-	t.Printx(0, "EnemyHp: " << m->enemyHp);
+	t.Printx(0, "EnemyHp: " << m->enemy.Hp());
 	t.Print("");
-	t.Printx(0, "[1] - Attack 1");
-	t.Printx(0, "[2] - Attack 2");
-	t.Printx(0, "[3] - Attack 3");
-	t.Printx(0, "[4] - Attack 4");
+
+	auto abilities = c.GetAbilities();
+	for( int x = 0; x < 4; ++x ){
+		t.Printx(0, "[" << x << "] - " << abilities[x]->Name());
+	}
 }
 
 void State_Battle::Update()
 {
 	Character& c = w.GetCharacter();
-	switch( t.Key() ){
+	auto key = t.Key();
+	switch( key ){
 		case '1':
-			if( c.Mana() >= 5){
-				c.UseMana(5);
-				c.GenerateHeat(2);
-				m->enemyHp -= 10;
-			}
+		case '2':
+		case '3':
+		case '4':
+			c.UseSkill(key - 48, m->enemy);
 			break;
 	}
 	c.GainMana(0.2);
-	c.LoseHeat(0.1);
-	if( m->enemyHp <= 0 ){
+	if( m->enemy.Hp() <= 0 ){
 		s.pop();
 	}
 }
