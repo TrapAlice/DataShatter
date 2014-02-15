@@ -44,7 +44,7 @@ def files_to_build project
 	to_build = []
 
 	Dir.glob("src/#{project}/**/*.cpp") do |source|
-		
+
 		target = ".obj/#{project}/" + File.basename(source, File.extname(source)) + ".o"
 		depend = ".dep/#{project}/" + File.basename(source, File.extname(source)) + ".d"
 		begin
@@ -62,7 +62,7 @@ def files_to_build project
 					end
 				end
 			end
-		rescue 
+		rescue
 			to_build.push source
 		end
 	end
@@ -74,11 +74,11 @@ def build_object_files project, targets, compiler, flags
 	targets.each do |source|
 		target = ".obj/#{project}/" + File.basename(source, File.extname(source)) + ".o"
 		depend = ".dep/#{project}/" + File.basename(source, File.extname(source)) + ".d"
-		exec = "#{compiler} -c -Wall -Iinclude -Isrc -std=c++11 #{flags} #{source} -o #{target} -MD -MF #{depend}"
+		exec = "#{compiler} -c -Wall -Iinclude -Isrc/#{project} -Isrc -std=c++11 #{flags} #{source} -o #{target} -MD -MF #{depend}"
 		puts "    [BUILD] #{source}"
 		r = `#{exec}`
 		if $?.exitstatus == 1
-			exit
+			exit 1
 		end
 	end
 end
@@ -99,7 +99,10 @@ def link_project project, compiler, flags, *additional_objects
 	exe = "bin/#{project}"
 	exec = "#{compiler} #{objects} #{flags} -Wl,-rpath=./lib -o #{exe}"
 	puts "  [LINKING] #{exe}"
-	`#{exec}`
+	r = `#{exec}`
+    if $?.exitstatus == 1
+        exit 1
+    end
 end
 
 def compile_project project, compiler, cflags
@@ -151,4 +154,6 @@ compile_project "test", CC, CFLAGS
 
 link_project "DataShatter", CC, LDFLAGS
 link_project "test", CC, LDFLAGS, "DataShatter"
+
+exit 0
 
