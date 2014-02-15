@@ -10,6 +10,7 @@ public:
 	Enemy();
 	~Enemy();
     void            Attack(Combatant&);
+	void            Update(Combatant&);
 
 private:
 	HAS_PRIVATE_VARIABLES;

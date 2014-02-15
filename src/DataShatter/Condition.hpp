@@ -15,7 +15,7 @@ class Combatant;
 class Condition{
 public:
 	using active_function = std::function<void(Combatant&, Combatant&, int&)>;
-    Condition(ConditionType, active_function);
+    Condition(ConditionType, active_function, unsigned duration);
 	Condition(Condition&&) noexcept;
     ~Condition() noexcept;
 

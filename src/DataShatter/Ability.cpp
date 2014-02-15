@@ -5,7 +5,7 @@
 
 Condition Defending{ConditionType::On_defense,[](Combatant&,Combatant&, int& damage){
 	damage = 0;
-}};
+}, 1};
 
 PRIVATE_VARIABLES(Ability){
 	PrivateVariables(string const& name, int manaCost, int damage)

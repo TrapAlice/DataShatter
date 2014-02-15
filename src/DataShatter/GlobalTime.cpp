@@ -45,6 +45,7 @@ GlobalTime& GlobalTime::getInstance()
 unique_ptr<GlobalTime> GlobalTime::timeInstance;
 
 GlobalTime::GlobalTime()
+	: INIT_PRIVATE_VARIABLES()
 {
 }
 

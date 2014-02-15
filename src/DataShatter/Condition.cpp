@@ -1,24 +1,30 @@
 #include "Condition.hpp"
 #include "Combatant.hpp"
+#include "GlobalTime.hpp"
 
 PRIVATE_VARIABLES(Condition){
     PrivateVariables(ConditionType type,
-                     active_function activate)
+                     active_function activate,
+		     unsigned duration)
         : type(type)
+	, duration(duration)
+	, expire_time(GlobalTime::Current() + duration)
         , activate(activate)
     {}
     ConditionType   type;
-    int             expire_time;
+    unsigned        duration;
+    unsigned        expire_time;
     active_function activate;
 };
 
 Condition::Condition(ConditionType type,
-                     active_function activate)
-    : INIT_PRIVATE_VARIABLES(type, activate)
+                     active_function activate,
+		     unsigned duration)
+    : INIT_PRIVATE_VARIABLES(type, activate, duration)
 {}
 
 Condition::Condition(Condition&& c) noexcept
-	: INIT_PRIVATE_VARIABLES(c.m->type, c.m->activate)
+	: INIT_PRIVATE_VARIABLES(c.m->type, c.m->activate, c.m->duration)
 {}
 
 Condition::~Condition() noexcept
