@@ -24,7 +24,8 @@ using std::stack;
 using std::map;
 using std::ostringstream;
 
-typedef std::chrono::time_point<std::chrono::system_clock> Time;
+typedef std::chrono::system_clock Time;
+typedef std::chrono::time_point<std::chrono::system_clock> TimePoint;
 
 #define DEBUG(...) std::cerr << __FILE__ << ":" << __LINE__ << " - " << __VA_ARGS__ << std::endl;
 
