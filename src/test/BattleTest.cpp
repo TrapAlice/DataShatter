@@ -31,6 +31,7 @@ TEST(Battle, CharacterUseSkill){
 
 TEST(Battle, EnemyAttackCharacter){
 	GlobalTime::SetDebugging();
+	GlobalTime::Reset();
     Character c;
     Enemy e;
 
