@@ -27,6 +27,7 @@ public:
 	void            Update(Combatant&);
 	void            BattleEnd();
 	int             Heat() const;
+	bool            isCooldown() const;
 	vector<Item> const& Items() const;
 	Equipment&      GetEquipment() const;
 	int             Bonus(BonusType) const;

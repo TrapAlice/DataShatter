@@ -57,7 +57,7 @@ void Character::UseSkill(int skill, Enemy& target)
 {
     Ability const& ability = *m->abilities[skill-1];
 	if( ability.ManaCost() > Mana() ) return;
-	if( m->cooldown > GlobalTime::Current() ) return;
+	if( isCooldown() ) return;
 	ability.Activate(*this, target);
     UseMana(ability.ManaCost());
     GenerateHeat(ability.Heat());
@@ -97,6 +97,7 @@ void Character::Equip(Item const& item, int location)
 }
 
 int Character::Heat() const { return m->heat; }
+bool Character::isCooldown() const { return m->cooldown > GlobalTime::Current(); }
 const vector<Item>& Character::Items() const { return m->items; }
 Equipment& Character::GetEquipment() const { return m->equipment; }
 int Character::Bonus(BonusType type) const { return m->equipment.Bonus(type); }
