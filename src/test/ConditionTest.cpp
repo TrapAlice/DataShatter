@@ -1,7 +1,7 @@
 #include "UnitTest.hpp"
 #include "DataShatter/Condition.hpp"
 #include "DataShatter/GlobalTime.hpp"
-#include "DataShatter/Combatant.hpp"
+#include "DataShatter/Enemy.hpp"
 
 TEST(Condition, ConditionExpiring){
 	GlobalTime::SetDebugging();
@@ -20,7 +20,7 @@ TEST(Condition, ConditionExpiring){
 TEST(Condition, ConditionFunction){
 	Condition c{ConditionType::On_defense,
 		[](Combatant&, Combatant&, int& damage){ damage /= 2; }, 5};
-	Combatant blank;
+	Enemy blank;
 
 	int damage = 20;
 	c.Activate(blank, blank, damage);
