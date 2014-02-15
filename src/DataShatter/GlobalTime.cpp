@@ -9,14 +9,14 @@ PRIVATE_VARIABLES(GlobalTime){
 	{}
 	TimePoint   start;
 	bool        testing;
-	unsigned    testTime;
+	unsigned long testTime;
 };
 
-unsigned GlobalTime::Current()
+unsigned long GlobalTime::Current()
 {
 	if( getInstance().m->testing ) return getInstance().m->testTime;
-	auto delta = getInstance().m->start - Time::now();
-	return delta.count();
+	auto delta = Time::now() - getInstance().m->start;
+	return delta.count()/1000000;
 }
 
 void GlobalTime::SetDebugging()

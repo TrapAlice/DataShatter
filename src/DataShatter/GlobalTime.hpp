@@ -6,7 +6,7 @@
 
 class GlobalTime{
 public:
-	static unsigned Current();
+	static unsigned long Current();
 	~GlobalTime();
 
 	static void     SetDebugging();
