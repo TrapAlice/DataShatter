@@ -60,5 +60,4 @@ TEST(Battle, CharacterBlocksEnemy){
 
     TEST_EQ(c.Hp(), c.MaxHp());
     TEST_EQ(e.Hp(), e.MaxHp());
-    TEST_CHECK(c.Mana() < c.MaxMana());
 }
