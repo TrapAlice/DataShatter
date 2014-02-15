@@ -24,6 +24,7 @@ public:
 	void            GiveItem(Item);
 	void            Equip(Item const&);
 	void            Equip(Item const&, int EquippedLocation);
+	void            BattleEnd();
 	int             Heat() const;
 	vector<Item> const& Items() const;
 	Equipment&      GetEquipment() const;

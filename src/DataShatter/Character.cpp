@@ -59,6 +59,11 @@ void Character::UseSkill(int skill, Enemy& target)
     target.TakeDamage(ability.Damage());
 }
 
+void Character::BattleEnd()
+{
+	GainMana(MaxMana());
+}
+
 void Character::GiveItem(Item item)
 {
 	m->items.emplace_back(std::move(item));
