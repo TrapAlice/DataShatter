@@ -12,8 +12,10 @@ void State_Town::Render()
 	t.Printx(0, "You are in a town and stuff");
 	t.Printx(0, "");
 	t.Printx(0, "[1] Leave the town");
+	t.SetColour(Colour::Gray);
 	t.Printx(0, "[2] Look at the shops");
 	t.Printx(0, "[3] Look at yourself");
+	t.SetColour(Colour::White);
 }
 
 void State_Town::Update()
