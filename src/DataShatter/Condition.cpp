@@ -8,12 +8,12 @@ PRIVATE_VARIABLES(Condition){
 		     unsigned duration)
         : type(type)
 	, duration(duration)
-	, expire_time(GlobalTime::Current() + duration)
+	, expireTime(GlobalTime::Current() + duration)
         , activate(activate)
     {}
     ConditionType   type;
     unsigned        duration;
-    unsigned        expire_time;
+    unsigned        expireTime;
     active_function activate;
 };
 
@@ -36,5 +36,5 @@ void Condition::Activate(Combatant& attacker, Combatant& defender, int& value)
 }
 
 ConditionType Condition::Type() const { return m->type; }
-bool Condition::isExpired() const { return false; }
+bool Condition::isExpired() const { return m->expireTime <= GlobalTime::Current(); }
 

@@ -5,7 +5,7 @@
 #include <functional>
 
 enum class ConditionType{
-    On_turn,
+    On_tick,
     On_attack,
     On_defense
 };
