@@ -53,6 +53,7 @@ void Character::GenerateHeat(double amount)
 void Character::UseSkill(int skill, Enemy& target)
 {
     Ability const& ability = *m->abilities[skill-1];
+	if( ability.ManaCost() > Mana() ) return;
 	ability.Activate(*this, target);
     UseMana(ability.ManaCost());
     GenerateHeat(ability.Heat());
