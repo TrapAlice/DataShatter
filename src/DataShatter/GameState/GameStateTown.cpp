@@ -1,7 +1,7 @@
 #include "GameStateTown.hpp"
 #include "GameStateBattle.hpp"
-#include "../Terminal.hpp"
-#include "../World.hpp"
+#include "Terminal.hpp"
+#include "World.hpp"
 
 State_Town::State_Town(Terminal& t, GameStateStack& s, World& w)
 	: iGameState(t,s,w)

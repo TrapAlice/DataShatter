@@ -1,10 +1,10 @@
 #include "GameStateBattle.hpp"
 
-#include "../Ability.hpp"
-#include "../Character.hpp"
-#include "../Enemy.hpp"
-#include "../Terminal.hpp"
-#include "../World.hpp"
+#include "Ability.hpp"
+#include "Character.hpp"
+#include "Enemy.hpp"
+#include "Terminal.hpp"
+#include "World.hpp"
 
 PRIVATE_VARIABLES(State_Battle){
 	Enemy           enemy;
