@@ -1,4 +1,5 @@
 #include "Combatant.hpp"
+#include "common.hpp"
 #include "Condition.hpp"
 #include <list>
 
@@ -21,7 +22,7 @@ void Combatant::TakeDamage(int amount)
 {
 	for( auto condition :  m->conditions ){
 		if( condition->Type() == ConditionType::On_defense){
-			condition->Activate(*this, *this);
+			condition->Activate(*this, *this, amount);
 		}
 	}
     m->hp -= (m->hp - amount > 0)? amount : m->hp;

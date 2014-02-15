@@ -5,6 +5,8 @@
 #include "PimplMacro/PimplMacro.hpp"
 #include "AbilityId.hpp"
 
+class Combatant;
+
 class Ability{
 public:
 	Ability(string const& name, int manaCost, int damage);
@@ -14,6 +16,7 @@ public:
     int             ManaCost() const;
     int             Heat() const;
     int             Damage() const;
+	void            Activate(Combatant&, Combatant&) const;
 private:
 	HAS_PRIVATE_VARIABLES;
 };

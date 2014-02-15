@@ -14,12 +14,12 @@ class Combatant;
 
 class Condition{
 public:
-    Condition(ConditionType, std::function<void(Combatant&, Combatant&)>);
+    Condition(ConditionType, std::function<void(Combatant&, Combatant&, int&)>);
 	Condition(Condition&&) noexcept;
     ~Condition() noexcept;
 
 	ConditionType   Type() const;
-	void            Activate(Combatant&, Combatant&);
+	void            Activate(Combatant&, Combatant&, int&);
 private:
     HAS_PRIVATE_VARIABLES;
 };

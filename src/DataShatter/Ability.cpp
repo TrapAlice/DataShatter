@@ -1,4 +1,11 @@
 #include "Ability.hpp"
+#include "Combatant.hpp"
+#include "Condition.hpp"
+#include <functional>
+
+Condition Defending{ConditionType::On_defense,[](Combatant&,Combatant&, int& damage){
+	damage = 0;
+}};
 
 PRIVATE_VARIABLES(Ability){
 	PrivateVariables(string const& name, int manaCost, int damage)
@@ -9,11 +16,17 @@ PRIVATE_VARIABLES(Ability){
 	string          Name;
 	int             ManaCost;
     int             Damage;
+	std::function<void(Combatant&, Combatant&)> activate;
 };
 
 Ability::Ability(string const& name, int manaCost, int damage)
 	: INIT_PRIVATE_VARIABLES(name, 3, damage)
-{}
+{
+	if(name == "Shield-Skill03"){
+		m->activate = [](Combatant& attacker, Combatant& defender)
+		                { attacker.GainCondition(Defending); };
+	}
+}
 
 Ability::Ability(Ability&& s) noexcept
 	: INIT_PRIVATE_VARIABLES(s.m->Name, s.m->ManaCost, s.m->Damage)
@@ -23,6 +36,13 @@ Ability::Ability(Ability&& s) noexcept
 
 Ability::~Ability() noexcept
 {}
+
+void Ability::Activate(Combatant& attacker, Combatant& defender) const
+{
+	if( m->activate ){
+		m->activate(attacker, defender);
+	}
+}
 
 string const& Ability::Name() const { return m->Name; }
 int Ability::ManaCost() const { return m->ManaCost; }
