@@ -4,12 +4,14 @@
 #include "Equipment.hpp"
 #include "Ability.hpp"
 #include "Enemy.hpp"
+#include "GlobalTime.hpp"
 
 PRIVATE_VARIABLES(Character){
 	double          heat = 0;
 	vector<Item>    items;
 	Equipment       equipment;
 	std::array<Ability const*, 8> abilities;
+	unsigned        cooldown = 0;
 };
 
 PRIVATE_FUNCTIONS(Character){
@@ -54,10 +56,12 @@ void Character::UseSkill(int skill, Enemy& target)
 {
     Ability const& ability = *m->abilities[skill-1];
 	if( ability.ManaCost() > Mana() ) return;
+	if( m->cooldown > GlobalTime::Current() ) return;
 	ability.Activate(*this, target);
     UseMana(ability.ManaCost());
     GenerateHeat(ability.Heat());
     target.TakeDamage(ability.Damage());
+    m->cooldown = GlobalTime::Current() + ability.Cooldown();
 }
 
 void Character::BattleEnd()
