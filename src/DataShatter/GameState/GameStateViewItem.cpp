@@ -27,10 +27,9 @@ void State_ViewItem::Render()
 {
 	t.Printx(0, m->item.Name());
 	t.Printx(0, m->item.Info());
-	t.Printx(0, m->item.Type());
-	t.Printx(0, m->item.Skill());
-	t.Printx(0, m->item.Power());
-	t.Printx(0, m->item.Durability() << "/" << m->item.MaxDurability());
+	t.Printx(0, m->item.Type() << " " << m->item.Skill());
+	t.Printx(0, m->item.Power() << " power");
+	t.Printx(0, m->item.Durability() << "/" << m->item.MaxDurability() << " durability");
 	t.Printx(0, "");
 	t.Printx(0, "[E] Equip");
 	if( m->equipping ){
