@@ -5,6 +5,8 @@
 #include "PimplMacro/PimplMacro.hpp"
 
 struct ItemData;
+enum class ItemType;
+enum class ItemSkill;
 
 class Item{
 public:
@@ -12,6 +14,14 @@ public:
 	Item(Item&&) noexcept;
 	~Item() noexcept;
 	ItemData const& Data() const;
+	string          Name() const;
+	string          Info() const;
+	ItemType        Type() const;
+	ItemSkill       Skill() const;
+	int             Power() const;
+	int             Durability() const;
+	int             MaxDurability() const;
+
 private:
 	HAS_PRIVATE_VARIABLES;
 };

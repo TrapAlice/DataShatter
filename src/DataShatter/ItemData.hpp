@@ -8,12 +8,14 @@ enum class ItemType{
 	Weapon,
 	Armor,
 };
+std::ostream& operator<< (std::ostream&, const ItemType);
 
 enum class ItemSkill{
 	Sword,
 	Shield,
 	NA,
 };
+std::ostream& operator<< (std::ostream&, const ItemSkill);
 
 enum class ItemEquipSlot{
 	NA,

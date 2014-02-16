@@ -47,3 +47,23 @@ ItemDataStore::~ItemDataStore()
 	ClearData();
 }
 
+std::ostream& operator<< (std::ostream& os, const ItemType type)
+{
+	switch(type){
+		case ItemType::Misc: os << "Miscellaneous "; break;
+		case ItemType::Weapon: os << "Weapon "; break;
+		case ItemType::Armor: os << "Armor "; break;
+	}
+	return os;
+}
+
+std::ostream& operator<< (std::ostream& os, const ItemSkill skill)
+{
+	switch(skill){
+		case ItemSkill::Sword: os << "Sword "; break;
+		case ItemSkill::Shield: os << "Shield "; break;
+		case ItemSkill::NA: os << ""; break;
+	}
+	return os;
+}
+
