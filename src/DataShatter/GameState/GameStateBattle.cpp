@@ -54,7 +54,7 @@ void State_Battle::Update()
 			c.UseSkill(key - 48, m->enemy);
 			break;
 	}
-	c.GainMana(0.2);
+	c.GainMana(0.02);
 	m->enemy.Update(c);
 	c.Update(m->enemy);
 	if( m->enemy.Hp() <= 0 ){
