@@ -16,20 +16,22 @@ PRIVATE_VARIABLES(Character){
 };
 
 PRIVATE_FUNCTIONS(Character){
-	PRIVATE_FUNCTION_DECLARE(void, ChangeWeaponAbilities, ItemSkill const skill, int location){
+	PRIVATE_FUNCTION_DECLARE(void, ChangeWeaponAbilities){
 		int offset = 3 + static_cast<int>(ItemSkill::NA);
-		if( location == RIGHT_HAND ){
-			This->m->abilities[0] = &AbilityStore::GetAbility(static_cast<int>(skill)*offset);
-			This->m->abilities[1] = &AbilityStore::GetAbility(static_cast<int>(skill)*offset + 1);
-		} else if( location == LEFT_HAND ) {
-			This->m->abilities[2] = &AbilityStore::GetAbility(static_cast<int>(skill)*offset + 2);
-		} else return;
+
+		if( !This->m->equipment.Equipped(RIGHT_HAND) ) return;
+		auto right_skill = This->m->equipment.Equipped(RIGHT_HAND)->Data().Skill;
+		This->m->abilities[0] =
+			&AbilityStore::GetAbility(static_cast<int>(right_skill)*offset);
+		This->m->abilities[1] =
+			&AbilityStore::GetAbility(static_cast<int>(right_skill)*offset + 1);
+
+		if( !This->m->equipment.Equipped(LEFT_HAND) )  return;
+		auto left_skill  = This->m->equipment.Equipped(LEFT_HAND)->Data().Skill;
+		This->m->abilities[2] =
+			&AbilityStore::GetAbility(static_cast<int>(left_skill)*offset + 2);
 
 		//Get the skills type of the item held in the left and right hand
-		if( !This->m->equipment.Equipped(RIGHT_HAND) ) return;
-		if( !This->m->equipment.Equipped(LEFT_HAND) )  return;
-		auto right_skill = This->m->equipment.Equipped(RIGHT_HAND)->Data().Skill;
-		auto left_skill  = This->m->equipment.Equipped(LEFT_HAND)->Data().Skill;
 		auto right_id    = static_cast<int>(right_skill);
 		auto left_id     = static_cast<int>(left_skill);
 
@@ -84,7 +86,7 @@ void Character::Equip(Item const& item)
 {
 	m->equipment.Equip(item);
 	if( item.Data().EquipSlot == ItemEquipSlot::Hand ){
-		PRIVATE(ChangeWeaponAbilities, item.Data().Skill, RIGHT_HAND);
+		PRIVATE(ChangeWeaponAbilities);
 	}
 }
 
@@ -92,7 +94,7 @@ void Character::Equip(Item const& item, int location)
 {
 	m->equipment.Equip(item, location);
 	if( item.Data().EquipSlot == ItemEquipSlot::Hand ){
-		PRIVATE(ChangeWeaponAbilities, item.Data().Skill, location);
+		PRIVATE(ChangeWeaponAbilities);
 	}
 }
 
