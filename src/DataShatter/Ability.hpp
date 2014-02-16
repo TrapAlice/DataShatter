@@ -9,11 +9,11 @@ class Combatant;
 
 class Ability{
 public:
-	Ability(string const& name, int manaCost, int damage);
+	Ability(string const& name, int damage, double manaCost, double heat, unsigned cooldown);
 	Ability(Ability&&) noexcept;
 	~Ability() noexcept;
 	string const&   Name() const;
-    int             ManaCost() const;
+	double          ManaCost() const;
     int             Heat() const;
     int             Damage() const;
 	void            Activate(Combatant&, Combatant&) const;
