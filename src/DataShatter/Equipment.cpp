@@ -18,8 +18,12 @@ Equipment::~Equipment()
 
 void Equipment::Equip(Item const& item)
 {
-	if( item.Data().EquipSlot == ItemEquipSlot::Hand )
+	if( item.Data().EquipSlot == ItemEquipSlot::Hand ){
+		if( m->equipment[LEFT_HAND] == &item ){
+			m->equipment[LEFT_HAND] = m->equipment[RIGHT_HAND];
+		}
 		m->equipment[RIGHT_HAND] = &item;
+	}
 }
 
 void Equipment::Equip(Item const& item, int location)
