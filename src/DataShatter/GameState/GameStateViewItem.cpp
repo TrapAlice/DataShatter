@@ -4,12 +4,15 @@
 #include "World.hpp"
 #include "ItemData.hpp"
 #include "Character.hpp"
+#include "Equipment.hpp"
 
 PRIVATE_VARIABLES(State_ViewItem){
 	PrivateVariables(Item const& i)
 		: item(i)
+		, equipping(false)
 	{}
 	Item const& item;
+	bool            equipping;
 };
 
 State_ViewItem::State_ViewItem(Terminal& t, GameStateStack& s, World& w, Item const& i)
@@ -30,6 +33,10 @@ void State_ViewItem::Render()
 	t.Printx(0, m->item.Durability() << "/" << m->item.MaxDurability());
 	t.Printx(0, "");
 	t.Printx(0, "[E] Equip");
+	if( m->equipping ){
+		t.Printx(0, "[1] Right hand");
+		t.Printx(0, "[2] Left hand");
+	}
 	t.Printx(0, "[A] Back");
 }
 
@@ -41,7 +48,24 @@ void State_ViewItem::Update()
 			s.pop();
 			break;
 		case 'e':
-			c.Equip(m->item);
+			if( m->item.Type() == ItemType::Weapon ){
+				m->equipping = true;
+			} else {
+				c.Equip(m->item);
+			}
 			break;
+		case '1':
+			if( m->equipping ){
+				c.Equip(m->item, RIGHT_HAND);
+				m->equipping = false;
+			}
+			break;
+		case '2':
+			if( m->equipping ){
+				c.Equip(m->item, LEFT_HAND);
+				m->equipping = false;
+			}
+			break;
+
 	}
 }

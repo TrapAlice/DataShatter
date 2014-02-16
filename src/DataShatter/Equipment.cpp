@@ -28,9 +28,14 @@ void Equipment::Equip(Item const& item)
 
 void Equipment::Equip(Item const& item, int location)
 {
-	if( item.Data().EquipSlot == ItemEquipSlot::Hand &&
-		!(location != RIGHT_HAND || location != LEFT_HAND))
-		return;
+	if( item.Data().EquipSlot == ItemEquipSlot::Hand){
+		if( !(location != RIGHT_HAND || location != LEFT_HAND)) return;
+		if( location == RIGHT_HAND && m->equipment[LEFT_HAND] == &item){
+			m->equipment[LEFT_HAND] = m->equipment[RIGHT_HAND];
+		} else if( m->equipment[RIGHT_HAND] == &item ){
+			m->equipment[RIGHT_HAND] = m->equipment[LEFT_HAND];
+		}
+	}
 	m->equipment[location] = &item;
 }
 
