@@ -16,7 +16,6 @@ void Enemy::Attack(Combatant& target)
 {
     SetState(CombatantState::Preparing);
     m->preparingTime = GlobalTime::Current() + 500;
-    DEBUG("Enemy prepares to attack!");
 }
 
 void Enemy::Update(Combatant& target)
@@ -27,12 +26,10 @@ void Enemy::Update(Combatant& target)
 	}
 	GainMana(0.1);
 	if( GlobalTime::Current() > m->preparingTime && State() == CombatantState::Preparing){
-		DEBUG("Enemy attacks!");
 		m->damageTime = GlobalTime::Current() + 1000;
 		SetState(CombatantState::Attacking);
 	}
 	if( GlobalTime::Current() > m->damageTime && State() == CombatantState::Attacking ){
-		DEBUG("Enemy hit!");
 		target.TakeDamage(5);
 		SetState(CombatantState::Idle);
 	}

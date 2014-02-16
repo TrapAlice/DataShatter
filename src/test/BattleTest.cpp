@@ -35,8 +35,12 @@ TEST(Battle, EnemyAttackCharacter){
     Character c;
     Enemy e;
 
-    e.Attack(c);
-    GlobalTime::SetTime(5);
+    e.Update(c);
+    GlobalTime::SetTime(1000);
+    e.Update(c);
+    GlobalTime::SetTime(3000);
+    e.Update(c);
+    GlobalTime::SetTime(5000);
     e.Update(c);
 
     TEST_CHECK(c.Hp() < c.MaxHp());
