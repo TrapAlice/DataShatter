@@ -1,4 +1,5 @@
 #include "GameStateBattle.hpp"
+#include "GameStateBattleEnd.hpp"
 
 #include "Ability.hpp"
 #include "Character.hpp"
@@ -60,6 +61,7 @@ void State_Battle::Update()
 	if( m->enemy.Hp() <= 0 ){
 		c.BattleEnd();
 		s.pop();
+		s.push(NEW_STATE(BattleEnd));
 	}
 }
 

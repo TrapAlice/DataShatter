@@ -26,11 +26,13 @@ public:
 	void            Equip(Item const&, int EquippedLocation);
 	void            Update(Combatant&);
 	void            BattleEnd();
+	bool            GainExp(unsigned amount);
 	int             Heat() const;
 	bool            isCooldown() const;
 	vector<Item> const& Items() const;
 	Equipment&      GetEquipment() const;
 	int             Bonus(BonusType) const;
+	unsigned        Exp() const;
 	std::array<Ability const*, 8> GetAbilities() const;
 private:
 	HAS_PRIVATE_VARIABLES;

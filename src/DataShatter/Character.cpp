@@ -13,6 +13,7 @@ PRIVATE_VARIABLES(Character){
 	Equipment       equipment;
 	std::array<Ability const*, 8> abilities;
 	unsigned        cooldown = 0;
+	unsigned        exp = 0;
 };
 
 PRIVATE_FUNCTIONS(Character){
@@ -37,6 +38,9 @@ PRIVATE_FUNCTIONS(Character){
 
 		This->m->abilities[3] =
 		    &AbilityStore::GetAbility((right_id * offset) + 3 + left_id);
+	};
+	PRIVATE_FUNCTION_DECLARE(bool, LevelUpCheck){
+		return (This->m->exp % 100 == 0);
 	};
 };
 
@@ -77,6 +81,12 @@ void Character::BattleEnd()
 	GainMana(MaxMana());
 }
 
+bool Character::GainExp(unsigned amount)
+{
+	m->exp += amount;
+	return PRIVATE(LevelUpCheck);
+}
+
 void Character::GiveItem(Item item)
 {
 	m->items.emplace_back(std::move(item));
@@ -103,5 +113,6 @@ bool Character::isCooldown() const { return m->cooldown > GlobalTime::Current();
 const vector<Item>& Character::Items() const { return m->items; }
 Equipment& Character::GetEquipment() const { return m->equipment; }
 int Character::Bonus(BonusType type) const { return m->equipment.Bonus(type); }
+unsigned Character::Exp() const { return m->exp; }
 std::array<Ability const*, 8> Character::GetAbilities() const { return m->abilities; }
 
