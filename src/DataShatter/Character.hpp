@@ -9,6 +9,7 @@ class Item;
 class Equipment;
 class Ability;
 class Enemy;
+class Spec;
 
 enum class BonusType;
 enum class ItemSkill;
@@ -33,6 +34,7 @@ public:
 	Equipment&      GetEquipment() const;
 	int             Bonus(BonusType) const;
 	unsigned        Exp() const;
+	Spec&           GetSpec() const;
 	std::array<Ability const*, 8> GetAbilities() const;
 private:
 	HAS_PRIVATE_VARIABLES;

@@ -5,6 +5,7 @@
 #include "Equipment.hpp"
 #include "Item.hpp"
 #include "GameStateInventory.hpp"
+#include "Spec.hpp"
 
 State_Stats::State_Stats(Terminal& t, GameStateStack&s, World& w)
 	: iGameState(t,s,w)
@@ -15,7 +16,8 @@ State_Stats::~State_Stats(){}
 void State_Stats::Render()
 {
 	Character& c =  w.GetCharacter();
-	t.Printx(0, "Character stats");
+	t.Printx(0, "Character stats - " << c.GetSpec().Name() << "(" << c.GetSpec().Level()
+		 << ")");
 	t.Printx(0, "HP   : " << c.Hp() << "/" << c.MaxHp());
 	t.Printx(0, "Mana : " << c.Mana() << "/" << c.MaxMana());
 	t.Printx(0, "Heat : " << c.Heat());

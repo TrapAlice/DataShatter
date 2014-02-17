@@ -6,6 +6,7 @@
 #include "Enemy.hpp"
 #include "GlobalTime.hpp"
 #include "Condition.hpp"
+#include "SpecWarrior.hpp"
 
 PRIVATE_VARIABLES(Character){
 	double          heat = 0;
@@ -13,7 +14,7 @@ PRIVATE_VARIABLES(Character){
 	Equipment       equipment;
 	std::array<Ability const*, 8> abilities;
 	unsigned        cooldown = 0;
-	unsigned        exp = 0;
+	unique_ptr<Spec> spec;
 };
 
 PRIVATE_FUNCTIONS(Character){
@@ -39,14 +40,13 @@ PRIVATE_FUNCTIONS(Character){
 		This->m->abilities[3] =
 		    &AbilityStore::GetAbility((right_id * offset) + 3 + left_id);
 	};
-	PRIVATE_FUNCTION_DECLARE(bool, LevelUpCheck){
-		return (This->m->exp % 100 == 0);
-	};
 };
 
 Character::Character()
 	: INIT_PRIVATE_VARIABLES()
-{}
+{
+	m->spec.reset(new Spec_Warrior);
+}
 Character::~Character(){}
 
 void Character::LoseHeat(double amount)
@@ -83,8 +83,7 @@ void Character::BattleEnd()
 
 bool Character::GainExp(unsigned amount)
 {
-	m->exp += amount;
-	return PRIVATE(LevelUpCheck);
+	return m->spec->GainExp(amount);
 }
 
 void Character::GiveItem(Item item)
@@ -113,6 +112,7 @@ bool Character::isCooldown() const { return m->cooldown > GlobalTime::Current();
 const vector<Item>& Character::Items() const { return m->items; }
 Equipment& Character::GetEquipment() const { return m->equipment; }
 int Character::Bonus(BonusType type) const { return m->equipment.Bonus(type); }
-unsigned Character::Exp() const { return m->exp; }
+unsigned Character::Exp() const { return m->spec->Exp(); }
 std::array<Ability const*, 8> Character::GetAbilities() const { return m->abilities; }
+Spec& Character::GetSpec() const { return *m->spec; }
 
