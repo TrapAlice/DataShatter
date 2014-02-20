@@ -57,34 +57,14 @@ int Ability::Heat() const { return 1; }
 int Ability::Damage() const { return m->Damage; }
 unsigned Ability::Cooldown() const { return m->cooldown; }
 
-void AbilityStore::LoadAbilities()
-{
-#define ABILITY(ID, NAME, POWER, MANACOST, HEAT, COOLDOWN) AddAbility(ID, new Ability(NAME, POWER, MANACOST, HEAT, COOLDOWN));
-	ABILITY(Sword01, "Sword-Skill01", 5, 3, 0.1, 750);
-	ABILITY(Sword02, "Sword-Skill02", 10, 4, 0.1, 1000);
-	ABILITY(Sword03, "Sword-Skill03", 15, 7, 0.3, 1200);
-	ABILITY(SwordSword, "SwordSword-Skill", 20, 10, 0.5, 1200);
-	ABILITY(SwordShield, "SwordShield-Skill", 15, 7, 0.2, 1000);
-	ABILITY(Shield01, "Shield-Skill01", 3, 3, 0.1, 750);
-	ABILITY(Shield02, "Shield-Skill02", 7, 3, 0.2, 1000);
-	ABILITY(Shield03, "Shield-Skill03", 0, 0.5, 0.05, 250);
-	ABILITY(ShieldSword, "ShieldSword-Skill", 13, 9, 0.3, 1000);
-	ABILITY(ShieldShield, "ShieldShield-Skill", 0, 1, 0.1, 250);
-#undef ABILITY
-	mAbilitiesLoaded = true;
-}
-
-void AbilityStore::AddAbility(int id, Ability* ability)
-{
-	mAbilities[id].reset(ability);
-}
-
-Ability const& AbilityStore::GetAbility(int id)
-{
-	if( !mAbilitiesLoaded ) LoadAbilities();
-	return *mAbilities.at(id).get();
-}
-
-std::array<shared_ptr<Ability>, AbilityId::TOTAL> AbilityStore::mAbilities;
-bool AbilityStore::mAbilitiesLoaded = false;
+const Ability Sword01("Sword-Skill01", 5, 3, 0.1, 750);
+const Ability Sword02("Sword-Skill02", 5, 3, 0.1, 750);
+const Ability Sword03("Sword-Skill03", 5, 3, 0.1, 750);
+const Ability SwordSword("SwordSword-Skill", 5, 3, 0.1, 750);
+const Ability SwordShield("SwordShield-Skill", 5, 3, 0.1, 750);
+const Ability Shield01("Shield-Skill01", 5, 3, 0.1, 750);
+const Ability Shield02("Shield-Skill02", 5, 3, 0.1, 750);
+const Ability Shield03("Shield-Skill03", 5, 3, 0.1, 750);
+const Ability ShieldSword("ShieldSword-Skill", 5, 3, 0.1, 750);
+const Ability ShieldShield("ShieldShield-Skill", 5, 3, 0.1, 750);
 

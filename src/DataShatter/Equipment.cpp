@@ -18,24 +18,24 @@ Equipment::~Equipment()
 
 void Equipment::Equip(Item const& item)
 {
-	if( item.Data().EquipSlot == ItemEquipSlot::Hand ){
-		if( m->equipment[LEFT_HAND] == &item ){
-			m->equipment[LEFT_HAND] = m->equipment[RIGHT_HAND];
-		}
+	//if( item.Data().EquipSlot == ItemEquipSlot::Hand ){
+	//	if( m->equipment[LEFT_HAND] == &item ){
+	//		m->equipment[LEFT_HAND] = m->equipment[RIGHT_HAND];
+	//	}
 		m->equipment[RIGHT_HAND] = &item;
-	}
+	//}
 }
 
 void Equipment::Equip(Item const& item, int location)
 {
-	if( item.Data().EquipSlot == ItemEquipSlot::Hand){
-		if( !(location != RIGHT_HAND || location != LEFT_HAND)) return;
-		if( location == RIGHT_HAND && m->equipment[LEFT_HAND] == &item){
-			m->equipment[LEFT_HAND] = m->equipment[RIGHT_HAND];
-		} else if( m->equipment[RIGHT_HAND] == &item ){
-			m->equipment[RIGHT_HAND] = m->equipment[LEFT_HAND];
-		}
-	}
+	//if( item.Data().EquipSlot == ItemEquipSlot::Hand){
+	//	if( !(location != RIGHT_HAND || location != LEFT_HAND)) return;
+	//	if( location == RIGHT_HAND && m->equipment[LEFT_HAND] == &item){
+	//		m->equipment[LEFT_HAND] = m->equipment[RIGHT_HAND];
+	//	} else if( m->equipment[RIGHT_HAND] == &item ){
+	//		m->equipment[RIGHT_HAND] = m->equipment[LEFT_HAND];
+	//	}
+	//}
 	m->equipment[location] = &item;
 }
 
@@ -47,21 +47,21 @@ Item const* Equipment::Equipped(EquippedLocation slot)
 int Equipment::Bonus(BonusType type)
 {
 	int bonus = 0;
-	for ( int x = 0; x < EQUIPMENT_SLOTS; ++x ){
-		auto item = m->equipment[x];
-		if( !item ) continue;
-		switch( type ){
-			case BonusType::Attack:
-				if( !(item->Data().Type == ItemType::Weapon) )
-					continue;
-				break;
-			case BonusType::Defense:
-				if( !(item->Data().Type == ItemType::Armor) )
-					continue;
-				break;
-		}
-		bonus += m->equipment[x]->Data().Power;
-	}
+	//for ( int x = 0; x < EQUIPMENT_SLOTS; ++x ){
+	//	auto item = m->equipment[x];
+	//	if( !item ) continue;
+	//	switch( type ){
+	//		case BonusType::Attack:
+	//			if( !(item->Data().Type == ItemType::Weapon) )
+	//				continue;
+	//			break;
+	//		case BonusType::Defense:
+	//			if( !(item->Data().Type == ItemType::Armor) )
+	//				continue;
+	//			break;
+	//	}
+	//	bonus += m->equipment[x]->Data().Power;
+	//}
 	return bonus;
 }
 

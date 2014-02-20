@@ -1,6 +1,7 @@
 #include "Character.hpp"
 #include "Item.hpp"
 #include "ItemData.hpp"
+#include "ItemType.hpp"
 #include "Equipment.hpp"
 #include "Ability.hpp"
 #include "Enemy.hpp"
@@ -19,26 +20,42 @@ PRIVATE_VARIABLES(Character){
 
 PRIVATE_FUNCTIONS(Character){
 	PRIVATE_FUNCTION_DECLARE(void, ChangeWeaponAbilities){
-		int offset = 3 + static_cast<int>(ItemSkill::NA);
+		auto& equipment = This->m->equipment;
+		auto right_hand = equipment.Equipped(RIGHT_HAND);
+		if( !right_hand ) return;
+		auto right_skill = right_hand->Data().Type;
+		auto left_hand =  equipment.Equipped(LEFT_HAND);
+		ItemType const* left_skill = 0;
+		if( left_hand ){
+			left_skill = left_hand->Data().Type;
+		}
 
-		if( !This->m->equipment.Equipped(RIGHT_HAND) ) return;
-		auto right_skill = This->m->equipment.Equipped(RIGHT_HAND)->Data().Skill;
-		This->m->abilities[0] =
-			&AbilityStore::GetAbility(static_cast<int>(right_skill)*offset);
-		This->m->abilities[1] =
-			&AbilityStore::GetAbility(static_cast<int>(right_skill)*offset + 1);
 
-		if( !This->m->equipment.Equipped(LEFT_HAND) )  return;
-		auto left_skill  = This->m->equipment.Equipped(LEFT_HAND)->Data().Skill;
-		This->m->abilities[2] =
-			&AbilityStore::GetAbility(static_cast<int>(left_skill)*offset + 2);
+		auto weapon_abilities = right_skill->GetAbilities(left_skill);
+		auto& abilities = This->m->abilities;
+		for( int x = 0; x < weapon_abilities.size(); ++x ){
+			abilities[x] = weapon_abilities[x];
+		}
+		//int offset = 3 + static_cast<int>(ItemSkill::NA);
 
-		//Get the skills type of the item held in the left and right hand
-		auto right_id    = static_cast<int>(right_skill);
-		auto left_id     = static_cast<int>(left_skill);
+		//if( !This->m->equipment.Equipped(RIGHT_HAND) ) return;
+		//auto right_skill = This->m->equipment.Equipped(RIGHT_HAND)->Data().Skill;
+		//This->m->abilities[0] =
+		//	&AbilityStore::GetAbility(static_cast<int>(right_skill)*offset);
+		//This->m->abilities[1] =
+		//	&AbilityStore::GetAbility(static_cast<int>(right_skill)*offset + 1);
 
-		This->m->abilities[3] =
-		    &AbilityStore::GetAbility((right_id * offset) + 3 + left_id);
+		//if( !This->m->equipment.Equipped(LEFT_HAND) )  return;
+		//auto left_skill  = This->m->equipment.Equipped(LEFT_HAND)->Data().Skill;
+		//This->m->abilities[2] =
+		//	&AbilityStore::GetAbility(static_cast<int>(left_skill)*offset + 2);
+
+		////Get the skills type of the item held in the left and right hand
+		//auto right_id    = static_cast<int>(right_skill);
+		//auto left_id     = static_cast<int>(left_skill);
+
+		//This->m->abilities[3] =
+		//    &AbilityStore::GetAbility((right_id * offset) + 3 + left_id);
 	};
 };
 
@@ -94,17 +111,17 @@ void Character::GiveItem(Item item)
 void Character::Equip(Item const& item)
 {
 	m->equipment.Equip(item);
-	if( item.Data().EquipSlot == ItemEquipSlot::Hand ){
+	//if( item.Data().EquipSlot == ItemEquipSlot::Hand ){
 		PRIVATE(ChangeWeaponAbilities);
-	}
+	//}
 }
 
 void Character::Equip(Item const& item, int location)
 {
 	m->equipment.Equip(item, location);
-	if( item.Data().EquipSlot == ItemEquipSlot::Hand ){
+	//if( item.Data().EquipSlot == ItemEquipSlot::Hand ){
 		PRIVATE(ChangeWeaponAbilities);
-	}
+	//}
 }
 
 int Character::Heat() const { return m->heat; }

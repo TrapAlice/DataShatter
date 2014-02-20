@@ -25,18 +25,18 @@ State_ViewItem::~State_ViewItem(){}
 
 void State_ViewItem::Render()
 {
-	t.Printx(0, m->item.Name());
-	t.Printx(0, m->item.Info());
-	t.Printx(0, m->item.Type() << " " << m->item.Skill());
-	t.Printx(0, m->item.Power() << " power");
-	t.Printx(0, m->item.Durability() << "/" << m->item.MaxDurability() << " durability");
-	t.Printx(0, "");
-	t.Printx(0, "[E] Equip");
-	if( m->equipping ){
-		t.Printx(0, "[1] Right hand");
-		t.Printx(0, "[2] Left hand");
-	}
-	t.Printx(0, "[A] Back");
+	//t.Printx(0, m->item.Name());
+	//t.Printx(0, m->item.Info());
+	//t.Printx(0, m->item.Type() << " " << m->item.Skill());
+	//t.Printx(0, m->item.Power() << " power");
+	//t.Printx(0, m->item.Durability() << "/" << m->item.MaxDurability() << " durability");
+	//t.Printx(0, "");
+	//t.Printx(0, "[E] Equip");
+	//if( m->equipping ){
+	//	t.Printx(0, "[1] Right hand");
+	//	t.Printx(0, "[2] Left hand");
+	//}
+	//t.Printx(0, "[A] Back");
 }
 
 void State_ViewItem::Update()
@@ -47,11 +47,11 @@ void State_ViewItem::Update()
 			s.pop();
 			break;
 		case 'e':
-			if( m->item.Type() == ItemType::Weapon ){
-				m->equipping = true;
-			} else {
-				c.Equip(m->item);
-			}
+			//if( m->item.Type() == ItemType::Weapon ){
+			//	m->equipping = true;
+			//} else {
+			//	c.Equip(m->item);
+			//}
 			break;
 		case '1':
 			if( m->equipping ){

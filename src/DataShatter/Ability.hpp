@@ -22,15 +22,16 @@ private:
 	HAS_PRIVATE_VARIABLES;
 };
 
-class AbilityStore{
-public:
-	static void     LoadAbilities();
-	static void     AddAbility(int id, Ability*);
-	static Ability const& GetAbility(int id);
-private:
-	static std::array<shared_ptr<Ability>, AbilityId::TOTAL> mAbilities;
-	static bool mAbilitiesLoaded;
-};
+extern const Ability Sword01;
+extern const Ability Sword02;
+extern const Ability Sword03;
+extern const Ability SwordSword;
+extern const Ability SwordShield;
+extern const Ability Shield01;
+extern const Ability Shield02;
+extern const Ability Shield03;
+extern const Ability ShieldSword;
+extern const Ability ShieldShield;
 
 #endif
 
