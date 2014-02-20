@@ -1,7 +1,7 @@
 #include "Character.hpp"
 #include "Item.hpp"
 #include "ItemData.hpp"
-#include "ItemType.hpp"
+#include "ItemType/ItemTypes.hpp"
 #include "Equipment.hpp"
 #include "Ability.hpp"
 #include "Enemy.hpp"

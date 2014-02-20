@@ -20,16 +20,6 @@ public:
 private:
 };
 
-class ItemType_Sword : public iItemType{
-public:
-	ItemType_Sword();
-	~ItemType_Sword();
-
-//	SkillType GetSkill();
-	EquipSlot GetEquipSlot();
-	vector<Ability const*> GetAbilities(iItemType const* offhand) const;
-	Ability const* OffhandAbility() const;
-};
 
 class ItemType_Shield : public iItemType{
 public:
@@ -41,6 +31,10 @@ public:
 	vector<Ability const*> GetAbilities(iItemType const* offhand) const;
 	Ability const* OffhandAbility() const;
 };
+
+namespace ItemType{
+	extern const ItemType_Shield Shield;
+}
 
 #endif
 

@@ -1,5 +1,5 @@
 #include "ItemData.hpp"
-#include "ItemType.hpp"
+#include "ItemType/ItemTypes.hpp"
 
 ItemData::ItemData(string const& name, string const& info,
 	iItemType const* type,// ItemSkill skill, ItemEquipSlot equipSlot,
@@ -20,8 +20,8 @@ void ItemDataStore::LoadData()
 {
 #define ITEM(NAME, INFO, TYPE,  POWER, DURABILITY)\
 	AddItem(ItemData(NAME, INFO, TYPE, POWER, DURABILITY));
-	ITEM("Sword", "It's sharp", new ItemType_Sword(), 5, 10);
-	ITEM("Shield", "It can block things", new ItemType_Shield(), 2, 5);
+	ITEM("Sword", "It's sharp", &ItemType::Sword, 5, 10);
+	ITEM("Shield", "It can block things", &ItemType::Shield, 2, 5);
 	//ITEM("Sword", "It's sharp", ItemType::Weapon, ItemSkill::Sword, ItemEquipSlot::Hand, 5, 10);
 	//ITEM("Shield", "It can block things", ItemType::Weapon, ItemSkill::Shield, ItemEquipSlot::Hand, 2, 5);
 #undef ITEM
