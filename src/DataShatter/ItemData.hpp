@@ -22,16 +22,16 @@
 //	Hand,
 //};
 
-class ItemType;
+class iItemType;
 
 struct ItemData{
 	ItemData(string const& name, string const& info,
-		ItemType const*,// ItemSkill, ItemEquipSlot,
+		iItemType const*,// ItemSkill, ItemEquipSlot,
 	    int power, int maxDurability);
 	~ItemData();
 	string          Name;
 	string          Info;
-	ItemType const* Type;
+	iItemType const* Type;
 	//ItemSkill       Skill;
 	//ItemEquipSlot   EquipSlot;
 	int             Power;

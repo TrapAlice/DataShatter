@@ -7,7 +7,7 @@
 struct ItemData;
 //enum class ItemType;
 //enum class ItemSkill;
-class ItemType;
+//class iItemType;
 
 class Item{
 public:

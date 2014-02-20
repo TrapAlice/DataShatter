@@ -2,7 +2,7 @@
 #include "ItemType.hpp"
 
 ItemData::ItemData(string const& name, string const& info,
-	ItemType const* type,// ItemSkill skill, ItemEquipSlot equipSlot,
+	iItemType const* type,// ItemSkill skill, ItemEquipSlot equipSlot,
 	int power, int maxDurability)
 	: Name(name)
 	, Info(info)
