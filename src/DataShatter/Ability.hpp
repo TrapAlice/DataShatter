@@ -3,7 +3,6 @@
 
 #include "common.hpp"
 #include "PimplMacro/PimplMacro.hpp"
-#include "AbilityId.hpp"
 
 class Combatant;
 
