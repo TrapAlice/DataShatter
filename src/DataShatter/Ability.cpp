@@ -68,5 +68,8 @@ unsigned Ability::Cooldown() const { return m->cooldown; }
        ABILITY(Shield03, "Shield-Skill03", 0, 0.5, 0.05, 250);
        ABILITY(ShieldSword, "ShieldSword-Skill", 13, 9, 0.3, 1000);
        ABILITY(ShieldShield, "ShieldShield-Skill", 0, 1, 0.1, 250);
+
+       ABILITY(WarriorSmash, "WarriorSmash-Skill", 0, 1, 0.1, 250);
+       ABILITY(WarriorBuff, "WarriorBuff-Skill", 0, 1, 0.1, 250);
 #undef ABILITY
 

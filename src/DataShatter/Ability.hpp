@@ -32,5 +32,8 @@ extern const Ability Shield03;
 extern const Ability ShieldSword;
 extern const Ability ShieldShield;
 
+extern const Ability WarriorSmash;
+extern const Ability WarriorBuff;
+
 #endif
 

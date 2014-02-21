@@ -4,6 +4,8 @@
 #include "PimplMacro/PimplMacro.hpp"
 #include "common.hpp"
 
+class Ability;
+
 class Spec{
 public:
 	Spec();
@@ -13,6 +15,7 @@ public:
 	unsigned        Exp() const;
 	virtual string  Name() const = 0;
 	unsigned        Level() const;
+	virtual vector<Ability const*> GetAbilities() const =0;
 private:
 	HAS_PRIVATE_VARIABLES;
 };

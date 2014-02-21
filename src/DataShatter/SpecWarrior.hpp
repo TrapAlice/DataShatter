@@ -9,6 +9,7 @@ public:
 	~Spec_Warrior();
 
 	string          Name() const;
+	vector<Ability const*> GetAbilities() const;
 private:
 };
 
