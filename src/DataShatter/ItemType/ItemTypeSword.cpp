@@ -16,12 +16,8 @@ vector<Ability const*> ItemType_Sword::GetAbilities(iItemType const* offhand) co
 		abilities.push_back(offhand->OffhandAbility());
 		auto offhand_type = typeid(*offhand).hash_code();
 
-#define OFFHAND_IS(TYPE, SKILL) if( offhand_type == typeid(ItemType_##TYPE).hash_code() )\
-					abilities.push_back(&SKILL);
 		OFFHAND_IS(Sword, SwordSword);
 		OFFHAND_IS(Shield, SwordShield);
-#undef OFFHAND_IS
-
 	}
 	return abilities;
 }

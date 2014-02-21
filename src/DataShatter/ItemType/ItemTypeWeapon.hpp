@@ -3,6 +3,9 @@
 
 #include "ItemType.hpp"
 
+#define OFFHAND_IS(TYPE, SKILL) if( offhand_type == typeid(ItemType_##TYPE).hash_code() )\
+abilities.push_back(&SKILL);
+
 class ItemType_Weapon : public iItemType{
 public:
 	ItemType_Weapon(){}
