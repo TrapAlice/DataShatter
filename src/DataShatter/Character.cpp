@@ -36,6 +36,10 @@ PRIVATE_FUNCTIONS(Character){
 		for( int x = 0; x < weapon_abilities.size(); ++x ){
 			abilities[x] = weapon_abilities[x];
 		}
+		auto specAbilities = This->m->spec->GetAbilities();
+		for( int x = 0; x < specAbilities.size(); ++x ){
+			abilities[x+4] = specAbilities[x];
+		}
 	};
 };
 
