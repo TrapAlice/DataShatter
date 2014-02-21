@@ -37,9 +37,14 @@ void State_Battle::Render()
 
 	auto abilities = c.GetAbilities();
 	if( c.isCooldown() ) t.SetColour(Colour::Gray);
-	for( int x = 0; x < 4; ++x ){
+	for( int x = 0; x < 8; ++x ){
 		if( abilities[x] ){
-			t.Printx(0, "[" << x << "] - " << abilities[x]->Name());
+			if( x < 4){
+				t.Printx(0, "[" << x << "] - " << abilities[x]->Name());
+			} else {
+				t.Printx(0, "[" <<(char) (x-4 + 'Q') << "] - "
+				          << abilities[x]->Name());
+			}
 		} else {
 			t.Printx(0, "---");
 		}
