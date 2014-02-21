@@ -70,11 +70,16 @@ def files_to_build project
 	return to_build.uniq
 end
 
-def build_object_files project, targets, compiler, flags
+def build_object_files project, targets, compiler, flags, *additional_objects
 	targets.each do |source|
 		target = ".obj/#{project}/" + File.basename(source, File.extname(source)) + ".o"
 		depend = ".dep/#{project}/" + File.basename(source, File.extname(source)) + ".d"
 		exec = "#{compiler} -c -Wall -Iinclude -Isrc/#{project} -Isrc -std=c++11 #{flags} #{source} -o #{target} -MD -MF #{depend}"
+		if additional_objects != nil
+			for additional in additional_objects
+				exec += " -Isrc/#{additional}"
+			end
+		end
 		puts "    [BUILD] #{source}"
 		r = `#{exec}`
 		if $?.exitstatus == 1
@@ -105,11 +110,11 @@ def link_project project, compiler, flags, *additional_objects
     end
 end
 
-def compile_project project, compiler, cflags
+def compile_project project, compiler, cflags, *aditional_objects
 	create_obj_folders_project project
 	create_dep_folders_project project
 	sources = files_to_build project
-	build_object_files project, sources, compiler, cflags
+	build_object_files project, sources, compiler, cflags, aditional_objects
 end
 
 CC           = 'clang++'
@@ -150,7 +155,7 @@ end
 create_bin_folder
 
 compile_project "DataShatter", CC, CFLAGS
-compile_project "test", CC, CFLAGS
+compile_project "test", CC, CFLAGS, "DataShatter"
 
 link_project "DataShatter", CC, LDFLAGS
 link_project "test", CC, LDFLAGS, "DataShatter"
