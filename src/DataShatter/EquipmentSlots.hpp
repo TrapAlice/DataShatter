@@ -2,6 +2,7 @@
 #define EQUIPMENTSLOT_HPP
 
 enum class EquipSlot{
+	NA,
 	Hand
 };
 
