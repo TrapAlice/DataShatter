@@ -5,10 +5,11 @@
 #include "DataShatter/ItemData.hpp"
 #include "DataShatter/Equipment.hpp"
 #include "DataShatter/GlobalTime.hpp"
+#include "DataShatter/ItemType/ItemTypes.hpp"
 
 namespace{
-	ItemData sword{"Sword", "", ItemType::Weapon, ItemSkill::Sword, ItemEquipSlot::Hand, 5, 5};
-	ItemData shield{"Shield", "", ItemType::Armor, ItemSkill::Shield,ItemEquipSlot::Hand, 2, 5};
+	ItemData sword{"Sword", "", &ItemType::Sword, 5, 5};
+	ItemData shield{"Shield", "", &ItemType::Shield, 2, 5};
 }
 
 
