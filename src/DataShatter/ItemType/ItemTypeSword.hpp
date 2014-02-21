@@ -5,9 +5,7 @@
 
 class ItemType_Sword : public ItemType_Weapon{
 public:
-	ItemType_Sword();
-	~ItemType_Sword();
-
+	ItemType_Sword(){}
 //	SkillType GetSkill();
 	vector<Ability const*> GetAbilities(iItemType const* offhand) const;
 	Ability const* OffhandAbility() const;

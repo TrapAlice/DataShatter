@@ -4,9 +4,6 @@
 #include "ItemTypes.hpp"
 #include <typeinfo>
 
-ItemType_Sword::ItemType_Sword(){}
-ItemType_Sword::~ItemType_Sword(){}
-
 vector<Ability const*> ItemType_Sword::GetAbilities(iItemType const* offhand) const
 {
 	vector<Ability const*> abilities;

@@ -2,16 +2,14 @@
 #define ITEMTYPE_WEAPON_HPP
 
 #include "ItemType.hpp"
+#include "EquipmentSlots.hpp"
 
 #define OFFHAND_IS(TYPE, SKILL) if( offhand_type == typeid(ItemType_##TYPE).hash_code() )\
 abilities.push_back(&SKILL);
 
 class ItemType_Weapon : public iItemType{
 public:
-	ItemType_Weapon(){}
-	virtual ~ItemType_Weapon(){}
-
-	EquipSlot GetEquipSlot() const;
+	EquipSlot GetEquipSlot() const { return EquipSlot::Hand; }
 	virtual vector<Ability const*> GetAbilities(iItemType const* offhand) const =0;
 	virtual Ability const* OffhandAbility() const =0;
 };

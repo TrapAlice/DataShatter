@@ -5,9 +5,7 @@
 
 class ItemType_Shield : public ItemType_Weapon{
 public:
-	ItemType_Shield();
-	~ItemType_Shield();
-
+	ItemType_Shield(){}
 	vector<Ability const*> GetAbilities(iItemType const* offhand) const;
 	Ability const* OffhandAbility() const;
 };

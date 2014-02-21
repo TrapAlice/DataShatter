@@ -4,9 +4,6 @@
 #include "ItemTypes.hpp"
 #include <typeinfo>
 
-ItemType_Shield::ItemType_Shield(){}
-ItemType_Shield::~ItemType_Shield(){}
-
 vector<Ability const*> ItemType_Shield::GetAbilities(iItemType const* offhand) const
 {
 	vector<Ability const*> abilities;
