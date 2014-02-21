@@ -2,7 +2,6 @@
 #define ITEMTYPE_WEAPON_HPP
 
 #include "ItemType.hpp"
-#include "EquipmentSlots.hpp"
 
 #define OFFHAND_IS(TYPE, SKILL) if( offhand_type == typeid(ItemType_##TYPE).hash_code() )\
 abilities.push_back(&SKILL);
