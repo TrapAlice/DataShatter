@@ -3,37 +3,16 @@
 
 #include "common.hpp"
 
-//enum class ItemType{
-//	Misc,
-//	Weapon,
-//	Armor,
-//};
-//std::ostream& operator<< (std::ostream&, const ItemType);
-//
-//enum class ItemSkill{
-//	Sword,
-//	Shield,
-//	NA,
-//};
-//std::ostream& operator<< (std::ostream&, const ItemSkill);
-//
-//enum class ItemEquipSlot{
-//	NA,
-//	Hand,
-//};
-
 class iItemType;
 
 struct ItemData{
 	ItemData(string const& name, string const& info,
-		iItemType const*,// ItemSkill, ItemEquipSlot,
+		iItemType const*,
 	    int power, int maxDurability);
 	~ItemData();
 	string          Name;
 	string          Info;
 	iItemType const* Type;
-	//ItemSkill       Skill;
-	//ItemEquipSlot   EquipSlot;
 	int             Power;
 	int             MaxDurability;
 };
