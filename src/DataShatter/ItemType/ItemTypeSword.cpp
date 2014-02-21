@@ -7,7 +7,6 @@
 ItemType_Sword::ItemType_Sword(){}
 ItemType_Sword::~ItemType_Sword(){}
 
-EquipSlot ItemType_Sword::GetEquipSlot() const { return EquipSlot::Hand; }
 vector<Ability const*> ItemType_Sword::GetAbilities(iItemType const* offhand) const
 {
 	vector<Ability const*> abilities;

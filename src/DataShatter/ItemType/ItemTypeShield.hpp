@@ -1,14 +1,13 @@
 #ifndef ITEMTYPE_SHIELD_HPP
 #define ITEMTYPE_SHIELD_HPP
 
-#include "ItemType.hpp"
+#include "ItemTypeWeapon.hpp"
 
-class ItemType_Shield : public iItemType{
+class ItemType_Shield : public ItemType_Weapon{
 public:
 	ItemType_Shield();
 	~ItemType_Shield();
 
-	EquipSlot GetEquipSlot() const;
 	vector<Ability const*> GetAbilities(iItemType const* offhand) const;
 	Ability const* OffhandAbility() const;
 };
