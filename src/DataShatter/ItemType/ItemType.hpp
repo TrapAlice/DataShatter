@@ -14,27 +14,11 @@ public:
 	virtual ~iItemType();
 
 //	virtual SkillType GetSkill() = 0;
-	virtual EquipSlot GetEquipSlot() = 0;
+	virtual EquipSlot GetEquipSlot() const = 0;
 	virtual vector<Ability const*> GetAbilities(iItemType const* offhand) const;
 	virtual Ability const* OffhandAbility() const;
 private:
 };
-
-
-class ItemType_Shield : public iItemType{
-public:
-	ItemType_Shield();
-	~ItemType_Shield();
-
-//	SkillType GetSkill();
-	EquipSlot GetEquipSlot();
-	vector<Ability const*> GetAbilities(iItemType const* offhand) const;
-	Ability const* OffhandAbility() const;
-};
-
-namespace ItemType{
-	extern const ItemType_Shield Shield;
-}
 
 #endif
 

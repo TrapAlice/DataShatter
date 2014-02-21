@@ -1,12 +1,13 @@
 #include "ItemTypeSword.hpp"
 #include "Ability.hpp"
 #include "EquipmentSlots.hpp"
+#include "ItemTypes.hpp"
 #include <typeinfo>
 
 ItemType_Sword::ItemType_Sword(){}
 ItemType_Sword::~ItemType_Sword(){}
 
-EquipSlot ItemType_Sword::GetEquipSlot() { return EquipSlot::Hand; }
+EquipSlot ItemType_Sword::GetEquipSlot() const { return EquipSlot::Hand; }
 vector<Ability const*> ItemType_Sword::GetAbilities(iItemType const* offhand) const
 {
 	vector<Ability const*> abilities;
@@ -27,5 +28,5 @@ vector<Ability const*> ItemType_Sword::GetAbilities(iItemType const* offhand) co
 }
 Ability const* ItemType_Sword::OffhandAbility() const { return &Sword03; }
 
-const ItemType_Sword ItemType::Sword;
+ItemType_Sword const ItemType::Sword;
 
