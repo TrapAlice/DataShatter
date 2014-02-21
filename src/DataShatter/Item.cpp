@@ -25,7 +25,7 @@ Item::~Item() noexcept {}
 ItemData const& Item::Data() const { return m->data; }
 string Item::Name() const { return m->data.Name; }
 string Item::Info() const { return m->data.Info; }
-//ItemType Item::Type() const { return m->data.Type; }
+iItemType const* Item::Type() const { return m->data.Type; }
 //ItemSkill Item::Skill() const { return m->data.Skill; }
 int Item::Power() const { return m->data.Power; }
 int Item::Durability() const { return m->durability; }

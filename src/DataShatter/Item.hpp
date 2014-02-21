@@ -7,7 +7,7 @@
 struct ItemData;
 //enum class ItemType;
 //enum class ItemSkill;
-//class iItemType;
+class iItemType;
 
 class Item{
 public:
@@ -17,7 +17,7 @@ public:
 	ItemData const& Data() const;
 	string          Name() const;
 	string          Info() const;
-	//ItemType        Type() const;
+	iItemType const* Type() const;
 	//ItemSkill       Skill() const;
 	int             Power() const;
 	int             Durability() const;

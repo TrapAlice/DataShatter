@@ -8,6 +8,7 @@
 #include "GlobalTime.hpp"
 #include "Condition.hpp"
 #include "SpecWarrior.hpp"
+#include "EquipmentSlots.hpp"
 
 PRIVATE_VARIABLES(Character){
 	double          heat = 0;
@@ -90,17 +91,17 @@ void Character::GiveItem(Item item)
 void Character::Equip(Item const& item)
 {
 	m->equipment.Equip(item);
-	//if( item.Data().EquipSlot == ItemEquipSlot::Hand ){
+	if( item.Type()->GetEquipSlot() == EquipSlot::Hand ){
 		PRIVATE(ChangeWeaponAbilities);
-	//}
+	}
 }
 
 void Character::Equip(Item const& item, int location)
 {
 	m->equipment.Equip(item, location);
-	//if( item.Data().EquipSlot == ItemEquipSlot::Hand ){
+	if( item.Type()->GetEquipSlot() == EquipSlot::Hand ){
 		PRIVATE(ChangeWeaponAbilities);
-	//}
+	}
 }
 
 int Character::Heat() const { return m->heat; }

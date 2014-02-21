@@ -2,6 +2,7 @@
 #include "Item.hpp"
 #include "ItemData.hpp"
 #include "Ability.hpp"
+#include "EquipmentSlots.hpp"
 
 #include <array>
 
