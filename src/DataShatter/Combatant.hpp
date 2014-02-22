@@ -23,7 +23,7 @@ public:
     void            UseMana(double amount);
     void            GainMana(double amount);
     void            SetState(CombatantState);
-	void            GainCondition(Condition&);
+	void            GainCondition(Condition);
     //virtual void    UseSkill(Combatant& target);
     virtual void    Update(Combatant&) = 0;
     std::list<Condition>& Conditions() const;

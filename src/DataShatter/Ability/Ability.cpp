@@ -1,6 +1,7 @@
 #include "Ability.hpp"
 #include "Combatant.hpp"
 #include "Condition/Condition.hpp"
+#include "Condition/ConditionData.hpp"
 #include <functional>
 
 
@@ -28,7 +29,7 @@ Ability::Ability(string const& name, int damage, double manaCost, double heat, u
 {
 	if(name == "Shield-Skill03"){
 		m->activate = [](Combatant& attacker, Combatant& defender)
-		                { attacker.GainCondition(Guarding); };
+		                { attacker.GainCondition(Condition(Guarding)); };
 	}
 }
 

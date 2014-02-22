@@ -1,6 +1,7 @@
 #include "Combatant.hpp"
 #include "common.hpp"
 #include "Condition/Condition.hpp"
+#include "Condition/ConditionData.hpp"
 
 PRIVATE_VARIABLES(Combatant){
     int             hp = 50;
@@ -47,7 +48,7 @@ void Combatant::SetState(CombatantState newState)
     m->state = newState;
 }
 
-void Combatant::GainCondition(Condition& newCondition)
+void Combatant::GainCondition(Condition newCondition)
 {
 	m->conditions.emplace_back(newCondition);
 }

@@ -1,5 +1,6 @@
 #include "UnitTest.hpp"
 #include "DataShatter/Condition/Condition.hpp"
+#include "DataShatter/Condition/ConditionData.hpp"
 #include "DataShatter/GlobalTime.hpp"
 #include "DataShatter/Enemy.hpp"
 
@@ -7,7 +8,7 @@ TEST(Condition, ConditionExpiring){
 	GlobalTime::SetDebugging();
 	GlobalTime::Reset();
 
-	Condition c{ConditionType::On_tick,[](Combatant&, Combatant&, int&){}, 5};
+	Condition c{{ConditionType::On_tick,5,[](Combatant&, Combatant&, int&){}}};
 	TEST_CHECK(!c.isExpired());
 	GlobalTime::SetTime(4);
 	TEST_CHECK(!c.isExpired());
@@ -18,8 +19,8 @@ TEST(Condition, ConditionExpiring){
 }
 
 TEST(Condition, ConditionFunction){
-	Condition c{ConditionType::On_defense,
-		[](Combatant&, Combatant&, int& damage){ damage /= 2; }, 5};
+	Condition c{{ConditionType::On_defense, 5,
+		[](Combatant&, Combatant&, int& damage){ damage /= 2; }}};
 	Enemy blank;
 
 	int damage = 20;
