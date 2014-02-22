@@ -36,10 +36,6 @@ PRIVATE_FUNCTIONS(Character){
 		for( int x = 0; x < weapon_abilities.size(); ++x ){
 			abilities[x] = weapon_abilities[x];
 		}
-		auto specAbilities = This->m->spec->GetAbilities();
-		for( int x = 0; x < specAbilities.size(); ++x ){
-			abilities[x+4] = specAbilities[x];
-		}
 	};
 };
 
@@ -106,6 +102,11 @@ void Character::Equip(Item const& item, int location)
 	if( item.Type()->GetEquipSlot() == EquipSlot::Hand ){
 		PRIVATE(ChangeWeaponAbilities);
 	}
+}
+
+void Character::ReplaceAbility(unsigned pos, Ability const& ability)
+{
+	m->abilities[pos-1] = &ability;
 }
 
 int Character::Heat() const { return m->heat; }

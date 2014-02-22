@@ -29,4 +29,13 @@ typedef std::chrono::time_point<std::chrono::high_resolution_clock> TimePoint;
 
 #define DEBUG(...) std::cerr << __FILE__ << ":" << __LINE__ << " - " << __VA_ARGS__ << std::endl;
 
+#define KEY(K) ((K == 1)? '1' :\
+               (K == 2)? '2' :\
+	       (K == 3)? '3' :\
+	       (K == 4)? '4' :\
+               (K == 5)? 'Q' :\
+               (K == 6)? 'W' :\
+	       (K == 7)? 'E' :\
+	       (K == 8)? 'R' : ' ')
+
 #endif

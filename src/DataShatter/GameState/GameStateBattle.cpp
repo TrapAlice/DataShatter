@@ -39,12 +39,7 @@ void State_Battle::Render()
 	if( c.isCooldown() ) t.SetColour(Colour::Gray);
 	for( int x = 0; x < 8; ++x ){
 		if( abilities[x] ){
-			if( x < 4){
-				t.Printx(0, "[" << x << "] - " << abilities[x]->Name());
-			} else {
-				t.Printx(0, "[" <<(char) (x-4 + 'Q') << "] - "
-				          << abilities[x]->Name());
-			}
+			t.Printx(0, "[" << KEY(x+1) << "] - " << abilities[x]->Name());
 		} else {
 			t.Printx(0, "---");
 		}
@@ -61,7 +56,7 @@ void State_Battle::Update()
 		case '2':
 		case '3':
 		case '4':
-			c.UseSkill(key - 48, m->enemy);
+			c.UseSkill(key - '1' + 1, m->enemy);
 			break;
 	}
 	c.GainMana(0.02);

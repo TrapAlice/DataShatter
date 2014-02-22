@@ -28,6 +28,7 @@ public:
 	void            Update(Combatant&);
 	void            BattleEnd();
 	bool            GainExp(unsigned amount);
+	void            ReplaceAbility(unsigned pos, Ability const&);
 	int             Heat() const;
 	bool            isCooldown() const;
 	vector<Item> const& Items() const;
