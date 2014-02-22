@@ -60,7 +60,6 @@ TEST(Battle, CharacterBlocksEnemy){
     c.Equip(c.Items()[1], LEFT_HAND);
 
     c.UseSkill(3, e);
-    c.SetState(CombatantState::Guarding);
     e.Attack(c);
 
     TEST_EQ(c.Hp(), c.MaxHp());
