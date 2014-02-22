@@ -46,9 +46,12 @@ Ability::~Ability() noexcept
 
 void Ability::Activate(Combatant& attacker, Combatant& defender) const
 {
+	int damage = 0;
+	damage = Damage();
 	if( m->activate ){
 		m->activate(attacker, defender);
 	}
+	defender.TakeDamage(damage);
 }
 
 string const& Ability::Name() const { return m->Name; }
