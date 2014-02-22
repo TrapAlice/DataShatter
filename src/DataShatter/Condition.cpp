@@ -43,3 +43,8 @@ void Condition::Activate(Combatant& attacker, Combatant& defender, int& value)
 ConditionType Condition::Type() const { return m->type; }
 bool Condition::isExpired() const { return m->expireTime <= GlobalTime::Current(); }
 
+Condition Guarding{ConditionType::On_defense,
+	[](Combatant&, Combatant&, int& damage){
+		damage = 0;
+	}, 250};
+

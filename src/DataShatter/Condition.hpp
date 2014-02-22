@@ -27,5 +27,7 @@ private:
     HAS_PRIVATE_VARIABLES;
 };
 
+extern Condition Guarding;
+
 #endif
 

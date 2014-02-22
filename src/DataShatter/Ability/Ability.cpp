@@ -3,9 +3,6 @@
 #include "Condition.hpp"
 #include <functional>
 
-Condition Defending{ConditionType::On_defense,[](Combatant&,Combatant&, int& damage){
-	damage = 0;
-}, 250};
 
 PRIVATE_VARIABLES(Ability){
 	PrivateVariables(string const& name, int damage, double manaCost, double heat, unsigned time)
@@ -31,7 +28,7 @@ Ability::Ability(string const& name, int damage, double manaCost, double heat, u
 {
 	if(name == "Shield-Skill03"){
 		m->activate = [](Combatant& attacker, Combatant& defender)
-		                { attacker.GainCondition(Defending); };
+		                { attacker.GainCondition(Guarding); };
 	}
 }
 
