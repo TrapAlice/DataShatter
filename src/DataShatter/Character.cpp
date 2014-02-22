@@ -32,9 +32,8 @@ PRIVATE_FUNCTIONS(Character){
 		}
 
 		auto weapon_abilities = right_skill->GetAbilities(left_skill);
-		auto& abilities = This->m->abilities;
 		for( int x = 0; x < weapon_abilities.size(); ++x ){
-			abilities[x] = weapon_abilities[x];
+			This->ReplaceAbility(x+1, *weapon_abilities[x]);
 		}
 	};
 };
