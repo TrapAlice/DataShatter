@@ -3,7 +3,7 @@
 #include "ItemData.hpp"
 #include "ItemType/ItemTypes.hpp"
 #include "Equipment.hpp"
-#include "Ability.hpp"
+#include "Ability/Ability.hpp"
 #include "Enemy.hpp"
 #include "GlobalTime.hpp"
 #include "Condition.hpp"

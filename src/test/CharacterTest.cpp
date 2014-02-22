@@ -3,7 +3,7 @@
 #include "DataShatter/Item.hpp"
 #include "DataShatter/ItemData.hpp"
 #include "DataShatter/Equipment.hpp"
-#include "DataShatter/Ability.hpp"
+#include "DataShatter/Ability/Ability.hpp"
 #include "DataShatter/ItemType/ItemTypes.hpp"
 
 namespace{

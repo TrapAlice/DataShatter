@@ -2,7 +2,7 @@
 #include "Character.hpp"
 #include "World.hpp"
 #include "Terminal.hpp"
-#include "Ability.hpp"
+#include "Ability/Ability.hpp"
 #include "Spec.hpp"
 
 PRIVATE_VARIABLES(State_SwapAbility){

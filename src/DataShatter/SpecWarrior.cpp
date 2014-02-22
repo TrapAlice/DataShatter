@@ -1,5 +1,5 @@
 #include "SpecWarrior.hpp"
-#include "Ability.hpp"
+#include "Ability/Ability.hpp"
 
 Spec_Warrior::Spec_Warrior(){}
 Spec_Warrior::~Spec_Warrior(){}
@@ -9,7 +9,7 @@ vector<Ability const*> Spec_Warrior::GetAbilities() const
 {
 	vector<Ability const*> abilities;
 	abilities.push_back(&WarriorSmash);
-	/*if( Level() > 2 )*/ abilities.push_back(&WarriorBuff);
+	if( Level() > 2 ) abilities.push_back(&WarriorBuff);
 
 	return abilities;
 }

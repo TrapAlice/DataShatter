@@ -2,7 +2,7 @@
 #include "Terminal.hpp"
 #include "World.hpp"
 #include "Character.hpp"
-#include "Ability.hpp"
+#include "Ability/Ability.hpp"
 #include "GameStateSwapAbility.hpp"
 
 PRIVATE_VARIABLES(State_ViewAbility){

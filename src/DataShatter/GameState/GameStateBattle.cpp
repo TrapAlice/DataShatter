@@ -1,7 +1,7 @@
 #include "GameStateBattle.hpp"
 #include "GameStateBattleEnd.hpp"
 
-#include "Ability.hpp"
+#include "Ability/Ability.hpp"
 #include "Character.hpp"
 #include "Enemy.hpp"
 #include "Terminal.hpp"

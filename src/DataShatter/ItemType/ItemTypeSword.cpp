@@ -1,5 +1,5 @@
 #include "ItemTypeSword.hpp"
-#include "Ability.hpp"
+#include "Ability/Ability.hpp"
 #include "EquipmentSlots.hpp"
 #include "ItemTypes.hpp"
 #include <typeinfo>

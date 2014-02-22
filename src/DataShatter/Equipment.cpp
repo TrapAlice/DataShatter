@@ -1,7 +1,6 @@
 #include "Equipment.hpp"
 #include "Item.hpp"
 #include "ItemData.hpp"
-#include "Ability.hpp"
 #include "EquipmentSlots.hpp"
 #include "ItemType/ItemTypes.hpp"
 

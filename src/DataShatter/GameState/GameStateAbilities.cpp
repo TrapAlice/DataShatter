@@ -3,7 +3,7 @@
 #include "Terminal.hpp"
 #include "World.hpp"
 #include "Character.hpp"
-#include "Ability.hpp"
+#include "Ability/Ability.hpp"
 #include "GameStateViewAbility.hpp"
 #include "GameStateSwapAbility.hpp"
 
