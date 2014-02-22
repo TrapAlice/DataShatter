@@ -29,7 +29,7 @@ State_SwapAbility::~State_SwapAbility(){}
 
 void State_SwapAbility::Render()
 {
-	for( int x = 0; x < m->specAbilities.size(); ++x ){
+	for( unsigned x = 0; x < m->specAbilities.size(); ++x ){
 		t.Printx(0, "[" << x+1 << "] - " << m->specAbilities[x]->Name());
 	}
 	t.Printx(0, "");
@@ -39,7 +39,7 @@ void State_SwapAbility::Render()
 void State_SwapAbility::Update()
 {
 	auto key = t.Key();
-	int key_value = key - '1';
+	unsigned key_value = key - '1';
 	if( key == 'a' ){
 		s.pop();
 		return;

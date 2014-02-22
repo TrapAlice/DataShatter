@@ -32,7 +32,7 @@ PRIVATE_FUNCTIONS(Character){
 		}
 
 		auto weapon_abilities = right_skill->GetAbilities(left_skill);
-		for( int x = 0; x < weapon_abilities.size(); ++x ){
+		for( unsigned x = 0; x < weapon_abilities.size(); ++x ){
 			This->ReplaceAbility(x+1, *weapon_abilities[x]);
 		}
 	};
@@ -63,7 +63,6 @@ void Character::UseSkill(int skill, Enemy& target)
 	ability.Activate(*this, target);
     UseMana(ability.ManaCost());
     GenerateHeat(ability.Heat());
-    target.TakeDamage(ability.Damage());
     m->cooldown = GlobalTime::Current() + ability.Cooldown() + 150;
 }
 

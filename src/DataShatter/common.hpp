@@ -1,8 +1,6 @@
 #ifndef COMMON_HPP
 #define COMMON_HPP
 
-#pragma clang diagnostic ignored "-Wswitch"
-
 #include <iostream>
 #include <sstream>
 #include <vector>

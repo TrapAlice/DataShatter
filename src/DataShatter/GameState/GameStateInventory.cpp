@@ -23,7 +23,7 @@ void State_Inventory::Render()
 	Character& c = w.GetCharacter();
 	t.Printx(0, "Inventory");
 	m->items = &c.Items();
-	for( int x = 0; x < m->items->size(); ++x ){
+	for( unsigned x = 0; x < m->items->size(); ++x ){
 		t.Printx(0, "[" << x+1 << "] - " <<(*m->items)[x].Name());
 	}
 	t.Printx(0, "");
@@ -32,7 +32,7 @@ void State_Inventory::Render()
 
 void State_Inventory::Update()
 {
-	int key = t.Key();
+	unsigned key = t.Key();
 	switch( key ){
 		case 'a':
 			s.pop();

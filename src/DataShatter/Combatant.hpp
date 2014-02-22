@@ -9,7 +9,6 @@ enum class CombatantState{
      Idle
     ,Preparing
     ,Attacking
-    ,Guarding
 };
 
 class Condition;
