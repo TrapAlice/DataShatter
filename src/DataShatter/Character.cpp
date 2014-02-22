@@ -64,7 +64,7 @@ void Character::UseSkill(int skill, Enemy& target)
     UseMana(ability.ManaCost());
     GenerateHeat(ability.Heat());
     target.TakeDamage(ability.Damage());
-    m->cooldown = GlobalTime::Current() + ability.Cooldown();
+    m->cooldown = GlobalTime::Current() + ability.Cooldown() + 150;
 }
 
 void Character::Update(Combatant& target)
@@ -109,7 +109,7 @@ void Character::ReplaceAbility(unsigned pos, Ability const& ability)
 }
 
 int Character::Heat() const { return m->heat; }
-bool Character::isCooldown() const { return m->cooldown > GlobalTime::Current(); }
+bool Character::isCooldown() const { return m->cooldown > GlobalTime::Current() - 150; }
 const vector<Item>& Character::Items() const { return m->items; }
 Equipment& Character::GetEquipment() const { return m->equipment; }
 int Character::Bonus(BonusType type) const { return m->equipment.Bonus(type); }
