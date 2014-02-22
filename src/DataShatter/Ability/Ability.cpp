@@ -1,6 +1,6 @@
 #include "Ability.hpp"
 #include "Combatant.hpp"
-#include "Condition.hpp"
+#include "Condition/Condition.hpp"
 #include <functional>
 
 

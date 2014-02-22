@@ -1,5 +1,5 @@
 #include "UnitTest.hpp"
-#include "DataShatter/Condition.hpp"
+#include "DataShatter/Condition/Condition.hpp"
 #include "DataShatter/GlobalTime.hpp"
 #include "DataShatter/Enemy.hpp"
 

@@ -6,7 +6,7 @@
 #include "Ability/Ability.hpp"
 #include "Enemy.hpp"
 #include "GlobalTime.hpp"
-#include "Condition.hpp"
+#include "Condition/Condition.hpp"
 #include "SpecWarrior.hpp"
 #include "EquipmentSlots.hpp"
 

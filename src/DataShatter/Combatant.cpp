@@ -1,6 +1,6 @@
 #include "Combatant.hpp"
 #include "common.hpp"
-#include "Condition.hpp"
+#include "Condition/Condition.hpp"
 
 PRIVATE_VARIABLES(Combatant){
     int             hp = 50;
